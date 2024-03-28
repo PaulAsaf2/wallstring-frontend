@@ -1,0 +1,44 @@
+.meditation {
+  display: flex;
+  column-gap: 28px;
+  margin: 0 18px;
+}
+
+.meditation_text {
+  display: flex;
+  opacity: 0;
+  position: relative;
+  background-color: white;
+  font-size: 15px;
+  color: #4B465C;
+  align-items: center;
+  padding: 0 20px;
+  border-radius: 8px;
+  transition: opacity 1s;
+}
+
+.meditation_text_show {
+  opacity: 1;
+}
+
+.meditaion_btn_off {
+  background-image: url(../assets/plant-purple.svg);
+  transition: background-image 1s, background-color .6s;
+}
+
+.meditaion_btn_on {
+  background-color: #7367F0;
+  background-image: url(../assets/plant.svg);
+}
+
+
+.meditation_triangle {
+  top: center;
+  left: -10px;
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-right: 10px solid white;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}

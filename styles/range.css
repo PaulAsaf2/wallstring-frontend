@@ -1,0 +1,41 @@
+.sliderticks {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sliderticks span {
+  font-size: 12px;
+  color: gray;
+  padding-right: 4px;
+  padding-top: 2px;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+  border-radius: 16px;
+  height: 6px;
+  background: #F1F0F2;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  background-color: #5C52C0;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+input[type="range"]::-moz-range-thumb {
+  height: 16px;
+  width: 16px;
+  background-color: #5C52C0;
+  border-radius: 50%;
+  border: 2px solid white;
+}
