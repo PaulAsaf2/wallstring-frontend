@@ -10,9 +10,81 @@
   align-items: center
 }
 
-.circle_arrow {
-  transform: rotate(-45deg);
+.straight_arrow {
+  position: absolute;
   transform-origin: center;
+  display: none;
+}
+
+.straight_arrow_top-right {
+  top: 30px;
+  display: block;
+}
+
+.straight_arrow_top-left {
+  top: 30px;
+  transform: rotate(180deg);
+  display: block;
+}
+
+.straight_arrow_bottom-right {
+  bottom: 30px;
+  display: block;
+}
+
+.straight_arrow_bottom-left {
+  bottom: 30px;
+  transform: rotate(180deg);
+  display: block;
+}
+
+.straight_arrow_left-up {
+  transform: rotate(-90deg);
+  left: -30px;
+  display: block;
+}
+
+.straight_arrow_left-down {
+  transform: rotate(90deg);
+  left: -30px;
+  display: block;
+}
+
+.straight_arrow_right-up {
+  transform: rotate(-90deg);
+  right: -30px;
+  display: block;
+}
+
+.straight_arrow_right-down {
+  transform: rotate(90deg);
+  right: -30px;
+  display: block;
+}
+
+.diagonal_arrow {
+  display: none;
+  transform-origin: center;
+}
+
+.diagonal_arrow_up-right {
+  transform: rotate(-45deg);
+  display: block;
+}
+
+.diagonal_arrow_down-right {
+  transform: rotate(45deg);
+  display: block;
+}
+
+.diagonal_arrow_down-left {
+  transform: rotate(135deg);
+  display: block;
+}
+
+.diagonal_arrow_up-left {
+  transform: rotate(-135deg);
+  display: block;
 }
 
 .circle_point {
@@ -25,20 +97,30 @@
   font-weight: 700;
   display: flex;
   justify-content: center;
-  align-items: center
-}
-
-.source_point {
-  bottom: -15px;
-  left: -15px;
-}
-
-.target_point {
+  align-items: center;
   display: none;
+}
+
+.point-A {
+  top: -15px;
+  left: -15px;
+  display: block;
+}
+
+.point-B {
   top: -15px;
   right: -15px;
+  display: block;
 }
 
-.target_point_show {
-  display: flex;
+.point-C {
+  bottom: -15px;
+  right: -15px;
+  display: block;
+}
+
+.point-D {
+  bottom: -15px;
+  left: -15px;
+  display: block;
 }
