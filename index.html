@@ -46,7 +46,6 @@
     <button
       type="button"
       class="square_btn meditaion_btn_off"
-      onclick="toggleMeditation()"
     ></button>
     <div class="meditation_text">
       Режим медитации включен
@@ -57,19 +56,14 @@
   <main class="main">
     <div class="circle">
       <img
-        src="./assets/arrow.svg"
-        alt="arrow"
-        class="diagonal_arrow"
-      >
-      <img
         src="./assets/arrow-horizontal.svg"
         alt="arrow"
-        class="straight_arrow"
+        class="arrow"
       >
-      <div class="circle_point"></div>
-      <div class="circle_point"></div>
-      <div class="circle_point"></div>
-      <div class="circle_point"></div>
+      <div class="circle_point" id="point-a"></div>
+      <div class="circle_point" id="point-b"></div>
+      <div class="circle_point" id="point-c"></div>
+      <div class="circle_point" id="point-d"></div>
     </div>
     <h2 class="step"></h2>
     <img 
@@ -84,8 +78,7 @@
     <button
       type="button"
       class="rectangular_btn trigger_btn"
-      onclick="togglePlay()"
-      >Начать
+      >Старт
     </button>
   </main>
 
@@ -103,6 +96,6 @@
     </button>
   </div> -->
 
-<script src="script.js"></script>
+<script type="module" src="script.js"></script>
 </body>
 </html>

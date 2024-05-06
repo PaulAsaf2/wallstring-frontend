@@ -10,82 +10,83 @@
   align-items: center
 }
 
-.straight_arrow {
+.arrow {
   position: absolute;
   transform-origin: center;
   display: none;
 }
 
-.straight_arrow_top-right {
+/* STRENGTH ARROWS */
+
+.arrow_a-b {
   top: 30px;
   display: block;
 }
 
-.straight_arrow_top-left {
+.arrow_b-a {
   top: 30px;
   transform: rotate(180deg);
   display: block;
 }
 
-.straight_arrow_bottom-right {
+.arrow_d-c {
   bottom: 30px;
   display: block;
 }
 
-.straight_arrow_bottom-left {
+.arrow_c-d {
   bottom: 30px;
   transform: rotate(180deg);
   display: block;
 }
 
-.straight_arrow_left-up {
+.arrow_d-a {
   transform: rotate(-90deg);
   left: -30px;
   display: block;
 }
 
-.straight_arrow_left-down {
+.arrow_a-d {
   transform: rotate(90deg);
   left: -30px;
   display: block;
 }
 
-.straight_arrow_right-up {
+.arrow_c-b {
   transform: rotate(-90deg);
   right: -30px;
   display: block;
 }
 
-.straight_arrow_right-down {
+.arrow_b-c {
   transform: rotate(90deg);
   right: -30px;
   display: block;
 }
 
-.diagonal_arrow {
-  display: none;
-  transform-origin: center;
-}
+/* DIAGONAL ARROWS */
 
-.diagonal_arrow_up-right {
+.arrow_d-b {
   transform: rotate(-45deg);
   display: block;
 }
 
-.diagonal_arrow_down-right {
+.arrow_a-c {
   transform: rotate(45deg);
   display: block;
 }
 
-.diagonal_arrow_down-left {
+.arrow_b-d {
   transform: rotate(135deg);
   display: block;
 }
 
-.diagonal_arrow_up-left {
+.arrow_c-a {
   transform: rotate(-135deg);
   display: block;
 }
+
+/* POINT --- POINT --- POINT */
 
 .circle_point {
   position: absolute;
@@ -101,26 +102,26 @@
   display: none;
 }
 
-.point-A {
+.point-a {
   top: -15px;
   left: -15px;
-  display: block;
+  display: flex;
 }
 
-.point-B {
+.point-b {
   top: -15px;
   right: -15px;
-  display: block;
+  display: flex;
 }
 
-.point-C {
+.point-c {
   bottom: -15px;
   right: -15px;
-  display: block;
+  display: flex;
 }
 
-.point-D {
+.point-d {
   bottom: -15px;
   left: -15px;
-  display: block;
+  display: flex;
 }
