@@ -95,8 +95,6 @@ body {
   padding: 0 8px;
 }
 
-
-
 .step {
   text-align: center;
   font-size: 1em;
@@ -127,4 +125,14 @@ body {
 
 .trigger_btn_pause {
   background-image: url(./assets/pause.svg);
+}
+
+@media screen and (max-width: 360px) {
+  .description {
+    margin: 20px 0 0 0;
+  }
+
+  .trigger_btn {
+    margin: 30px 0 20px 0;
+  }
 }

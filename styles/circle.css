@@ -125,3 +125,9 @@
   left: -15px;
   display: flex;
 }
+
+@media screen and (max-width: 360px) {
+  .circle {
+    margin: 20px 0 40px 0;
+  }
+}
