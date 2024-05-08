@@ -1,16 +1,37 @@
-import { sliderEl } from '../utils/constants.js'
+import { sliderEl, obj } from '../utils/constants.js'
 
 export function speedHandle(event) {
   let sliderValue = event.target.value;
-  let percent = (sliderValue == 2) ? 25
-    : (sliderValue == 3) ? 37.5
-    : (sliderValue == 4) ? 50
-    : (sliderValue == 5) ? 62.5
-    : (sliderValue == 6) ? 75
-    : (sliderValue == 7) ? 87.5
-    : (sliderValue == 8) ? 100
+  let percent = (sliderValue == 2) ? 20
+    : (sliderValue == 3) ? 32.5
+    : (sliderValue == 4) ? 45
+    : (sliderValue == 5) ? 57.5
+    : (sliderValue == 6) ? 70
+    : (sliderValue == 7) ? 82.5
+    : (sliderValue == 8) ? 95
     : 0;
 
   sliderEl.style.background = `
     linear-gradient(to right, #5C52C0 ${percent}%, #F1F0F2 ${percent}%)`;
+
+  obj.delay = sliderValue * 1000
+  localStorage.setItem('range', sliderValue)
+}
+
+export function speedHandleWhenPageLoad() {
+  sliderEl.value = localStorage.getItem('range')
+  let sliderValue = sliderEl.value;
+  let percent = (sliderValue == 2) ? 20
+    : (sliderValue == 3) ? 32.5
+    : (sliderValue == 4) ? 45
+    : (sliderValue == 5) ? 57.5
+    : (sliderValue == 6) ? 70
+    : (sliderValue == 7) ? 82.5
+    : (sliderValue == 8) ? 95
+    : 0;
+
+  sliderEl.style.background = `
+    linear-gradient(to right, #5C52C0 ${percent}%, #F1F0F2 ${percent}%)`;
+
+  obj.delay = sliderValue * 1000
 }

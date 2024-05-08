@@ -1,4 +1,5 @@
-import { playBtn } from '../utils/constants.js'
+import { playBtn,/* delay */ obj } from '../utils/constants.js'
+import { progressBarHandle } from './progressBarHandle.js'
 const pointA = document.getElementById('point-a')
 const pointB = document.getElementById('point-b')
 const pointC = document.getElementById('point-c')
@@ -28,11 +29,13 @@ function playbackHandling() {
 
   target.textContent = points[count]
   target.classList.add(`point-${points[count].charAt(0).toLowerCase()}`)
-  
+
   s = source.textContent.charAt(0).toLowerCase()
   t = target.textContent.charAt(0).toLowerCase()
 
   arrow.classList.add(`arrow_${s}-${t}`)
+
+  progressBarHandle(count + 1, points.length)
 }
 
 export function togglePlay() {
@@ -44,7 +47,11 @@ export function togglePlay() {
 
     playID = setTimeout(function play() {
       count++
-      if (!points[count]) return
+      if (!points[count]) {
+        playBtn.textContent = 'Старт'
+        playBtn.classList.remove('trigger_btn_pause')
+        return
+      }
 
       source.classList.remove(`point-${s}`)
       arrow.classList.remove(arrow.classList[1])
@@ -54,8 +61,8 @@ export function togglePlay() {
 
       playbackHandling()
 
-      playID = setTimeout(play, 1000)
-    }, 1000)
+      playID = setTimeout(play, obj.delay)
+    }, obj.delay)
   } else {
     playBtn.textContent = 'Старт'
     playBtn.classList.remove('trigger_btn_pause')

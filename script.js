@@ -1,6 +1,6 @@
 import { togglePlay } from './scripts/playbackHandle.js'
 import { playBtn, sliderEl } from './utils/constants.js'
-import { speedHandle } from './scripts/speedHandle.js'
+import { speedHandle, speedHandleWhenPageLoad } from './scripts/speedHandle.js'
 
 const popup = document.querySelector('.popup_dont_worry')
 const meditationBtn = document.querySelector('.meditaion_btn_off')
@@ -8,7 +8,15 @@ const meditationText = document.querySelector('.meditation_text')
 
 const tg = window.Telegram.WebApp
 
+console.log(
+ 179 / 180 * 100
+);
+console.log(
+  Math.round(179 / 180 * 100)
+);
+
 tg.expand()
+speedHandleWhenPageLoad()
 
 function closePopup() {
   popup.classList.add('popup_dont_worry_close')
