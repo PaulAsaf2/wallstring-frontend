@@ -8,13 +8,6 @@ const meditationText = document.querySelector('.meditation_text')
 
 const tg = window.Telegram.WebApp
 
-console.log(
- 179 / 180 * 100
-);
-console.log(
-  Math.round(179 / 180 * 100)
-);
-
 tg.expand()
 speedHandleWhenPageLoad()
 

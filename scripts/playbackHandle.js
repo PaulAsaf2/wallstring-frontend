@@ -1,5 +1,6 @@
-import { playBtn,/* delay */ obj } from '../utils/constants.js'
+import { playBtn, obj } from '../utils/constants.js'
 import { progressBarHandle } from './progressBarHandle.js'
+import { voiceHandle } from './soundHandle.js'
 const pointA = document.getElementById('point-a')
 const pointB = document.getElementById('point-b')
 const pointC = document.getElementById('point-c')
@@ -32,6 +33,9 @@ function playbackHandling() {
 
   s = source.textContent.charAt(0).toLowerCase()
   t = target.textContent.charAt(0).toLowerCase()
+
+  // передаю текст цели
+  voiceHandle(target.textContent)
 
   arrow.classList.add(`arrow_${s}-${t}`)
 

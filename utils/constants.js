@@ -4,11 +4,10 @@ let obj = {
   delay: 1000,
 }
 
-// let delay = 1000 // 1 sec
+// const a = new Audio()
 
 export {
   playBtn,
   sliderEl,
-  // delay,
   obj,
 }
