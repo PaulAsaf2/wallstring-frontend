@@ -26,8 +26,8 @@ source.classList.add('point-b')
 function playSound(letOrNum) {
   let audio = audioFiles[letOrNum]
   if (audio) {
-    audio.currentTime = 0
-    return audio.play().catch(error => alert(error))
+    audio.muted = false
+    return audio.play()
   } else {
     return Promise.reject(`Audio file for ${letOrNum} not found`)
   }
@@ -68,12 +68,11 @@ export function togglePlay() {
     playBtn.textContent = 'Пауза'
 
     const audioPromises = Object.values(audioFiles).map(audio => {
-      audio.volume = 0
+      audio.muted = true
       return audio.play()
         .then(() => {
           audio.pause()
           audio.currentTime = 0
-          audio.volume = 1
         })
         .catch(error => alert(`Ошибка в подготовке звукогого файла: ${error}`))
     })
