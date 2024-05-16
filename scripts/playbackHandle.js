@@ -1,7 +1,6 @@
 import { playBtn, obj } from '../utils/constants.js'
 import { progressBarHandle } from './progressBarHandle.js'
 import { soundHandle, prepareAudioFiles } from './soundHandle.js'
-const playBtn = document.querySelector('.trigger_btn')
 const pointA = document.getElementById('point-a')
 const pointB = document.getElementById('point-b')
 const pointC = document.getElementById('point-c')
