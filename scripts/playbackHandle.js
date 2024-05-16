@@ -1,7 +1,11 @@
 import { playBtn, obj } from '../utils/constants.js'
 import { progressBarHandle } from './progressBarHandle.js'
 import { soundHandle, prepareAudioFiles } from './soundHandle.js'
+const playBtn = document.querySelector('.trigger_btn')
+const pointA = document.getElementById('point-a')
 const pointB = document.getElementById('point-b')
+const pointC = document.getElementById('point-c')
+const pointD = document.getElementById('point-d')
 const arrow = document.querySelector('.arrow')
 let source, target, s, t //s,t - first letter of point e.g. A or C etc.
 let playID = null
@@ -23,11 +27,6 @@ function updateArrowDirection() {
 }
 
 function updateTargetPoint() {
-  const pointA = document.getElementById('point-a')
-  const pointB = document.getElementById('point-b')
-  const pointC = document.getElementById('point-c')
-  const pointD = document.getElementById('point-d')
-
   switch (points[index].charAt(0).toLowerCase()) {
     case 'a': target = pointA
       break
@@ -56,7 +55,7 @@ export function togglePlay() {
 
         playID = setTimeout(function play() {
           index++
-          
+
           if (!points[index]) {
             playBtn.textContent = 'Старт'
             playBtn.classList.remove('trigger_btn_pause')
