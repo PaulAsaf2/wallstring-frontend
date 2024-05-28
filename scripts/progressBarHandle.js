@@ -1,6 +1,6 @@
 const progBar = document.querySelector('.progress-bar')
 
-export function progressBarHandle(index, length) {
+export function updateProgressBar(index, length) {
   let percent = Math.round(index / length * 100)
 
   progBar.style.background = `
