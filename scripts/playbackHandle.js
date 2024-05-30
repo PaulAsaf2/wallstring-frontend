@@ -1,20 +1,15 @@
 import {
   playBtn, delay, points, pointA, pointB, pointC,
-  pointD, detectSounds,
+  pointD,
 } from '../utils/constants.js'
 // import { updateProgressBar } from './progressBarHandle.js'
-// import {  } from './soundHandle.js'
+import { playSound } from './soundHandle.js'
 
 // const arrow = document.querySelector('.arrow')
 // let source, target, s, t //s,t - first letter of point e.g. A or C etc.
 // let playID = null
-let sourcePoint, targetPoint, knittingId, currentPoint,
+let sourcePoint, targetPoint, knittingId,
   index = 0, isKnitting = false
-
-let sound = new Howl({
-  src: ['../audio/wallstingpoints.mp3'],
-  sprite: detectSounds,
-})
 
 sourcePoint = pointB
 sourcePoint.textContent = 'B31'
@@ -42,10 +37,7 @@ sourcePoint.classList.add('point-b')
 //   target.classList.add(`point-${points[index].charAt(0).toLowerCase()}`)
 // }
 
-function playSound(letter, number) {
-  sound.play(letter)
-  setTimeout(() => sound.play(number), delay.insidePoint)
-}
+
 
 function handleKnitting() {
   if (!points[index]) {
@@ -53,9 +45,8 @@ function handleKnitting() {
     return
   }
 
-  currentPoint = points[index]
-  let letter = currentPoint.charAt(0)
-  let number = currentPoint.slice(1)
+  let letter = points[index].charAt(0)
+  let number = points[index].slice(1)
 
   playSound(letter, number)
 
@@ -79,9 +70,9 @@ function stopKnitting() {
   playBtn.textContent = 'Старт'
   playBtn.classList.remove('trigger_btn_pause')
 
-  isKnitting = false
-
   clearTimeout(knittingId)
+
+  isKnitting = false
 }
 
 export function toggleKnitting() {
