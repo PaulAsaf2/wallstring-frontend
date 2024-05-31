@@ -1,13 +1,10 @@
 import {
   playBtn, delay, points, pointA, pointB, pointC,
-  pointD,
+  pointD, arrow,
 } from '../utils/constants.js'
-// import { updateProgressBar } from './progressBarHandle.js'
+import { updateProgressBar } from './progressBarHandle.js'
 import { playSound } from './soundHandle.js'
 
-// const arrow = document.querySelector('.arrow')
-// let source, target, s, t //s,t - first letter of point e.g. A or C etc.
-// let playID = null
 let sourcePoint, targetPoint, knittingId,
   index = 0, isKnitting = false
 
@@ -15,12 +12,13 @@ sourcePoint = pointB
 sourcePoint.textContent = 'B31'
 sourcePoint.classList.add('point-b')
 
-// function updateArrowDirection() {
-//   s = source.textContent.charAt(0).toLowerCase()
-//   t = target.textContent.charAt(0).toLowerCase()
-
-//   arrow.classList.add(`arrow_${s}-${t}`)
-// }
+function updateArrowDirection() {
+  let s = sourcePoint.textContent.charAt(0).toLowerCase()
+  let t = targetPoint.textContent.charAt(0).toLowerCase()
+  
+  arrow.classList.remove(arrow.classList[1])
+  arrow.classList.add(`arrow_${s}-${t}`)
+}
 
 function updatePoints() {
   if (index > 0) {
@@ -56,7 +54,9 @@ function handleKnitting() {
   let number = points[index].slice(1)
 
   updatePoints()
+  updateArrowDirection()
   playSound(letter, number)
+  updateProgressBar(index + 1, points.length)
 
   index++
 
@@ -92,25 +92,7 @@ export function toggleKnitting() {
 
       knittingId = setTimeout(startInterval, delay.betweenPoints)
     }, delay.betweenPoints)
-    // knittingId = setTimeout(function play() {
-    // index++
-
-    // source.classList.remove(`point-${s}`)
-    // arrow.classList.remove(arrow.classList[1])
-
-    // source = target
-    // target = points[index]
-
-    // updateTargetPoint()
-    // updateArrowDirection()
-    // updateProgressBar(index + 1, points.length)
-
-    //   knittingId = setTimeout(play, delay.betweenPoints)
-    // }, delay.betweenPoints)
-
-
   } else {
     stopKnitting()
-
   }
 }

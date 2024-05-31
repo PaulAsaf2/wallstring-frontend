@@ -1,4 +1,4 @@
-const progBar = document.querySelector('.progress-bar')
+import { progBar } from '../utils/constants.js'
 
 export function updateProgressBar(index, length) {
   let percent = Math.round(index / length * 100)
