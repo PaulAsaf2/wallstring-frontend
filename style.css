@@ -100,6 +100,7 @@ body {
   font-size: 1em;
   color: #6F6F6F;
   margin-bottom: 10px;
+  min-height: 20px;
 }
 
 .progress-bar_cont {
