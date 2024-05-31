@@ -22,22 +22,29 @@ sourcePoint.classList.add('point-b')
 //   arrow.classList.add(`arrow_${s}-${t}`)
 // }
 
-// function updateTargetPoint() {
-//   switch (points[index].charAt(0).toLowerCase()) {
-//     case 'a': target = pointA
-//       break
-//     case 'b': target = pointB
-//       break
-//     case 'c': target = pointC
-//       break
-//     case 'd': target = pointD
-//   }
+function updatePoints() {
+  if (index > 0) {
+    let letter = sourcePoint.textContent.charAt(0).toLowerCase()
 
-//   target.textContent = points[index]
-//   target.classList.add(`point-${points[index].charAt(0).toLowerCase()}`)
-// }
+    sourcePoint.classList.remove(`point-${letter}`)
+    sourcePoint = targetPoint
+  }
 
+  let letter = points[index].charAt(0).toLowerCase()
 
+  switch (letter) {
+    case 'a': targetPoint = pointA
+      break
+    case 'b': targetPoint = pointB
+      break
+    case 'c': targetPoint = pointC
+      break
+    case 'd': targetPoint = pointD
+  }
+
+  targetPoint.textContent = points[index]
+  targetPoint.classList.add(`point-${letter}`)
+}
 
 function handleKnitting() {
   if (!points[index]) {
@@ -48,6 +55,7 @@ function handleKnitting() {
   let letter = points[index].charAt(0)
   let number = points[index].slice(1)
 
+  updatePoints()
   playSound(letter, number)
 
   index++
