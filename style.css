@@ -92,7 +92,15 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 8px;
+  justify-content: center;
+  /* padding: 0 8px; */
+  padding: 14% 8px 0;
+  row-gap: 6vh;
+  /* outline: thin solid red; */
+}
+
+.step_section {
+  width: 100%;
 }
 
 .step {
@@ -101,6 +109,7 @@ body {
   color: #6F6F6F;
   margin-bottom: 10px;
   min-height: 20px;
+  /* outline: thin solid red; */
 }
 
 .progress-bar_cont {
@@ -108,6 +117,7 @@ body {
   width: 100%;
   height: 4px;
   background-color: lightgray;
+  /* outline: thin solid red; */
 }
 
 .progress-bar {
@@ -117,32 +127,42 @@ body {
 }
 
 .description {
+  /* display: none; */
+  position: absolute;
+  width: 80%;
   text-align: center;
   color: #6F6F6F;
   font-weight: 500;
-  margin: 40px 0 0 0;
+  /* margin: 40px 0 0 0; */
   line-height: 1.4;
+  background-color: white;
+  outline: 2px solid black;
+  padding: 10px;
+  border-radius: 6px;
+  /* font-size: 12px; */
 }
 
+.description_close {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 
 .trigger_btn {
-  margin: 46px 0 64px 0;
+  /* margin: 46px 0 64px 0; */
   background-image: url(./assets/triangle.svg);
   background-repeat: no-repeat;
   background-position: 104px center;
   padding-right: 30px;
+  /* outline: thin solid red; */
 }
 
 .trigger_btn_pause {
   background-image: url(./assets/pause.svg);
 }
 
-@media screen and (max-width: 360px) {
-  .description {
-    margin: 20px 0 0 0;
-  }
-
-  .trigger_btn {
-    margin: 30px 0 20px 0;
+@media screen and (min-height: 680px) {
+  .main {
+    padding: 15% 8px 0;
   }
 }

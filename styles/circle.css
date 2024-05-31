@@ -4,10 +4,11 @@
   height: 221px;
   outline: 4px solid #7367F0;
   border-radius: 50%;
-  margin: 40px 0 100px 0;
+  /* margin: 40px 0 100px 0; */
   display: flex;
   justify-content: center;
-  align-items: center
+  align-items: center;
+  /* outline: thin solid red; */
 }
 
 .arrow {
@@ -128,6 +129,6 @@
 
 @media screen and (max-width: 360px) {
   .circle {
-    margin: 20px 0 40px 0;
+    /* margin: 20px 0 40px 0; */
   }
 }
