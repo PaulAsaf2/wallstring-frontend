@@ -1,3 +1,7 @@
+const popup = document.querySelector('.popup_dont_worry')
+const meditationBtn = document.querySelector('.meditaion_btn_off')
+const meditationText = document.querySelector('.meditation_text')
+const closePopupBtn = document.querySelector('.close_popup_btn')
 const playBtn = document.querySelector('.trigger_btn')
 const sliderEl = document.querySelector("#range")
 const arrow = document.querySelector('.arrow')
@@ -87,7 +91,11 @@ const detectSounds = {
   60: [69360, 1140],
 }
 export {
+  popup,
+  meditationBtn,
+  meditationText,
   playBtn,
+  closePopupBtn,
   delay,
   sliderEl,
   points,
