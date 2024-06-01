@@ -1,5 +1,5 @@
-import { toggleKnitting } from './scripts/playbackHandle.js'
-import { playBtn, sliderEl } from './utils/constants.js'
+import { toggleKnitting, closeDescription } from './scripts/playbackHandle.js'
+import { playBtn, sliderEl, descriptionCloseBtn } from './utils/constants.js'
 import { knittingSpeedHandle } from './scripts/speedHandle.js'
 
 const popup = document.querySelector('.popup_dont_worry')
@@ -23,3 +23,4 @@ function toggleMeditation() {
 playBtn.addEventListener('click', toggleKnitting)
 meditationBtn.addEventListener('click', toggleMeditation)
 sliderEl.addEventListener('input', knittingSpeedHandle)
+descriptionCloseBtn.addEventListener('click', closeDescription)
