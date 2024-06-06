@@ -9,12 +9,12 @@ let knittingId, isKnitting = false
 point.source = point.B
 point.source.textContent = 'B31'
 point.source.classList.add('show_point')
-// point.source.classList.add('initial_point')
+point.source.classList.add('initial_point')
 
-// export function closeDescription() {
-//   point.source.classList.remove('initial_point')
-//   initialDescription.style.display = 'none';
-// }
+export function closeDescription() {
+  point.source.classList.remove('initial_point')
+  initialDescription.style.display = 'none';
+}
 
 function updateArrowDirection() {
   const smallArrow = point.source.nextElementSibling;
@@ -71,8 +71,8 @@ function handleKnitting() {
 
   updatePoints()
   updateArrowDirection()
-  // playSound(letter, number)
-  // updateProgressBar(point.index + 1, points.length)
+  playSound(letter, number)
+  updateProgressBar(point.index + 1, points.length)
 
   point.index++
 
@@ -81,7 +81,7 @@ function handleKnitting() {
 
 function startKnitting() {
   if (!points[point.index]) stopKnitting()
-  // if (point.index == 0) closeDescription()
+  if (point.index == 0) closeDescription()
 
   playBtn.classList.add('trigger_btn_pause')
   playBtn.textContent = 'Пауза'
