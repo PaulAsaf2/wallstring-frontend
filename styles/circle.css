@@ -69,7 +69,7 @@
 }
 
 .show_point {
-  display: block;
+  display: flex;
 }
 
 /* .initial_point { */

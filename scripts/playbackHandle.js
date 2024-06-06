@@ -6,9 +6,9 @@ import { playSound } from './soundHandle.js'
 
 let knittingId, isKnitting = false
 
-// point.source = point.B
-// point.source.textContent = 'B31'
-// point.source.classList.add('point-b')
+point.source = point.B
+point.source.textContent = 'B31'
+point.source.classList.add('show_point')
 // point.source.classList.add('initial_point')
 
 // export function closeDescription() {
@@ -26,26 +26,29 @@ function updateArrowDirection() {
 
 function updatePoints() {
   if (point.index > 0) {
-    let letter = point.source.textContent.charAt(0).toLowerCase()
+    let sourceLetter = point.source.textContent.charAt(0)
+    let targetLetter = point.target?.textContent.charAt(0)
 
-    point.source.classList.remove(`point-${letter}`)
-    point.source = point.target
+    if (sourceLetter == targetLetter) {
+      point.source.textContent = point.target?.textContent
+    } else {
+      point.source.classList.remove('show_point')
+      point.source = point.target
+    }
   }
+  
+  let sourceLetter = point.source.textContent.charAt(0)
+  let targetLetter = points[point.index].charAt(0)
 
-  let letter = points[point.index].charAt(0).toLowerCase()
-
-  switch (letter) {
-    case 'a': point.target = point.A
-      break
-    case 'b': point.target = point.B
-      break
-    case 'c': point.target = point.C
-      break
-    case 'd': point.target = point.D
+  if (sourceLetter == targetLetter) {
+    point.target = point[`${targetLetter}2`]
+  } else {
+    point.target = point[targetLetter]
+    point[`${sourceLetter}2`].classList.remove('show_point')
   }
-
+      
   point.target.textContent = points[point.index]
-  point.target.classList.add(`point-${letter}`)
+  point.target.classList.add(`show_point`)
 }
 
 function handleKnitting() {
@@ -58,9 +61,9 @@ function handleKnitting() {
   let number = points[point.index].slice(1)
 
   updatePoints()
-  updateArrowDirection()
-  playSound(letter, number)
-  updateProgressBar(point.index + 1, points.length)
+  // updateArrowDirection()
+  // playSound(letter, number)
+  // updateProgressBar(point.index + 1, points.length)
 
   point.index++
 
