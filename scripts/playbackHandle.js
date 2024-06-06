@@ -11,10 +11,10 @@ point.source.textContent = 'B31'
 point.source.classList.add('point-b')
 point.source.classList.add('initial_point')
 
-export function closeDescription() {
-  point.source.classList.remove('initial_point')
-  initialDescription.style.display = 'none';
-}
+// export function closeDescription() {
+//   point.source.classList.remove('initial_point')
+//   initialDescription.style.display = 'none';
+// }
 
 function updateArrowDirection() {
   let s = point.source.textContent.charAt(0).toLowerCase()
@@ -69,7 +69,7 @@ function handleKnitting() {
 
 function startKnitting() {
   if (!points[point.index]) stopKnitting()
-  if (point.index == 0) closeDescription()
+  // if (point.index == 0) closeDescription()
 
   playBtn.classList.add('trigger_btn_pause')
   playBtn.textContent = 'Пауза'
