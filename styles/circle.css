@@ -9,68 +9,133 @@
 
 .circle {
   position: relative;
-  width: 221px;
-  height: 221px;
+  width: 150px;
+  height: 150px;
   outline: 4px solid #7367F0;
   border-radius: 50%;
-  /* margin: 40px 0 100px 0; */
   display: flex;
   justify-content: center;
   align-items: center;
-  /* outline: thin solid red; */
 }
 
-.arrow {
+.big_arrow {
+  display: none;
   position: absolute;
   transform-origin: center;
+}
+
+/* POINTS */
+
+.point_container {
+  /* outline: thin solid red; */
+  position: absolute;
+  display: flex;
+  width: 102px;
+  column-gap: 6px;
+}
+
+.a_container {
+  flex-direction: row-reverse;
+  top: 0;
+  left: -94px;
+}
+
+.b_container {
+  top: 0;
+  right: -94px;
+}
+
+.c_container {
+  bottom: 0;
+  right: -94px;
+}
+
+.d_container {
+  flex-direction: row-reverse;
+  bottom: 0;
+  left: -94px;
+}
+
+.circle_point {
+  display: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  outline: 2px solid #6F6F6F;
+  justify-content: center;
+  align-items: center;
+  color: #6F6F6F;
+  font-weight: 700;
+}
+
+.show_point {
+  display: block;
+}
+
+/* .initial_point { */
+  /* animation: growShrink 2s infinite; */
+/* } */
+
+/* END POINTS */
+
+/* SMALL ARROWS */
+.small_arrow {
   display: none;
 }
 
-/* STRENGTH ARROWS */
+.show_arrow {
+  display: block;
+}
 
+.small_arrow_left {
+  transform: rotate(180deg);
+}
+/* END SMALL ARROWS */
+
+/* STRENGTH ARROWS */
 .arrow_a-b {
   top: 30px;
   display: block;
 }
 
 .arrow_b-a {
-  top: 30px;
+  top: 20px;
   transform: rotate(180deg);
   display: block;
 }
 
 .arrow_d-c {
-  bottom: 30px;
+  bottom: 20px;
   display: block;
 }
 
 .arrow_c-d {
-  bottom: 30px;
+  bottom: 20px;
   transform: rotate(180deg);
   display: block;
 }
 
 .arrow_d-a {
   transform: rotate(-90deg);
-  left: -30px;
+  left: -20px;
   display: block;
 }
 
 .arrow_a-d {
   transform: rotate(90deg);
-  left: -30px;
+  left: -20px;
   display: block;
 }
 
 .arrow_c-b {
   transform: rotate(-90deg);
-  right: -30px;
+  right: -20px;
   display: block;
 }
 
 .arrow_b-c {
   transform: rotate(90deg);
-  right: -30px;
+  right: -20px;
   display: block;
 }
 
@@ -94,50 +159,6 @@
 .arrow_c-a {
   transform: rotate(-135deg);
   display: block;
-}
-
-/* POINT --- POINT --- POINT */
-
-.circle_point {
-  position: absolute;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  outline: 2px solid #6F6F6F;
-  color: #6F6F6F;
-  font-weight: 700;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  display: none;
-}
-
-.point-a {
-  top: -15px;
-  left: -15px;
-  display: flex;
-}
-
-.point-b {
-  top: -15px;
-  right: -15px;
-  display: flex;
-}
-
-.point-c {
-  bottom: -15px;
-  right: -15px;
-  display: flex;
-}
-
-.point-d {
-  bottom: -15px;
-  left: -15px;
-  display: flex;
-}
-
-.initial_point {
-  /* animation: growShrink 2s infinite; */
 }
 
 @media screen and (max-width: 360px) {

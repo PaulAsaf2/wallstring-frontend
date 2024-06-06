@@ -6,10 +6,10 @@ import { playSound } from './soundHandle.js'
 
 let knittingId, isKnitting = false
 
-point.source = point.B
-point.source.textContent = 'B31'
-point.source.classList.add('point-b')
-point.source.classList.add('initial_point')
+// point.source = point.B
+// point.source.textContent = 'B31'
+// point.source.classList.add('point-b')
+// point.source.classList.add('initial_point')
 
 // export function closeDescription() {
 //   point.source.classList.remove('initial_point')
