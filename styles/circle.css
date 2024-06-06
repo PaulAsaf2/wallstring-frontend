@@ -72,9 +72,9 @@
   display: flex;
 }
 
-/* .initial_point { */
-  /* animation: growShrink 2s infinite; */
-/* } */
+.initial_point {
+  animation: growShrink 2s infinite;
+}
 
 /* END POINTS */
 

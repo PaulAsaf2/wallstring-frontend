@@ -1,4 +1,4 @@
-import { toggleKnitting,/* closeDescription */} from './scripts/playbackHandle.js'
+import { toggleKnitting, closeDescription} from './scripts/playbackHandle.js'
 import {
   popup, meditationBtn, meditationText,
   playBtn, sliderEl, descriptionCloseBtn,
@@ -6,9 +6,9 @@ import {
 } from './utils/constants.js'
 import { knittingSpeedHandle } from './scripts/speedHandle.js'
 
-// const tg = window.Telegram.WebApp
+const tg = window.Telegram.WebApp
 
-// tg.expand()
+tg.expand()
 knittingSpeedHandle()
 
 function closePopup() {
@@ -23,5 +23,5 @@ function toggleMeditation() {
 playBtn.addEventListener('click', toggleKnitting)
 meditationBtn.addEventListener('click', toggleMeditation)
 sliderEl.addEventListener('input', knittingSpeedHandle)
-// descriptionCloseBtn.addEventListener('click', closeDescription)
-// closePopupBtn.addEventListener('click', closePopup)
+descriptionCloseBtn.addEventListener('click', closeDescription)
+closePopupBtn.addEventListener('click', closePopup)
