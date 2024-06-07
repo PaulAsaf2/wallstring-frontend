@@ -1,8 +1,11 @@
 import {
-  playBtn, delay, points, arrow, point, initialDescription
+  playBtn, delay, points, point,
 } from '../utils/constants.js'
 import { updateProgressBar } from './progressBarHandle.js'
 import { playSound } from './soundHandle.js'
+import { updatePoints } from './updatePoints.js'
+import { updateArrowDirection } from './updateArrow.js'
+import { closeDescription } from '../script.js'
 
 let knittingId, isKnitting = false
 
@@ -11,67 +14,15 @@ point.source.textContent = 'B31'
 point.source.classList.add('show_point')
 point.source.classList.add('initial_point')
 
-export function closeDescription() {
-  point.source.classList.remove('initial_point')
-  initialDescription.style.display = 'none';
-}
-
-function updateArrowDirection() {
-  const smallArrow = point.source.nextElementSibling;
-  const allSmallArrows = Array.from(document.querySelectorAll('.small_arrow'))
-  let s = point.source.textContent.charAt(0).toLowerCase()
-  let t = point.target.textContent.charAt(0).toLowerCase()
-  
-  arrow.classList.remove(arrow.classList[1])
-  allSmallArrows.forEach(arrow => arrow.classList.remove('show_arrow'))
-
-  if (s == t) {
-    smallArrow.classList.add('show_arrow')
-  } else {
-    arrow.classList.add(`arrow_${s}-${t}`)
-  }
-
-}
-
-function updatePoints() {
-  if (point.index > 0) {
-    let sourceLetter = point.source.textContent.charAt(0)
-    let targetLetter = point.target?.textContent.charAt(0)
-
-    if (sourceLetter == targetLetter) {
-      point.source.textContent = point.target?.textContent
-    } else {
-      point.source.classList.remove('show_point')
-      point.source = point.target
-    }
-  }
-  
-  let sourceLetter = point.source.textContent.charAt(0)
-  let targetLetter = points[point.index].charAt(0)
-
-  if (sourceLetter == targetLetter) {
-    point.target = point[`${targetLetter}2`]
-  } else {
-    point.target = point[targetLetter]
-    point[`${sourceLetter}2`].classList.remove('show_point')
-  }
-      
-  point.target.textContent = points[point.index]
-  point.target.classList.add(`show_point`)
-}
-
 function handleKnitting() {
   if (!points[point.index]) {
     stopKnitting()
     return
   }
 
-  let letter = points[point.index].charAt(0)
-  let number = points[point.index].slice(1)
-
   updatePoints()
   updateArrowDirection()
-  playSound(letter, number)
+  playSound()
   updateProgressBar(point.index + 1, points.length)
 
   point.index++

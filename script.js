@@ -1,8 +1,8 @@
-import { toggleKnitting, closeDescription} from './scripts/playbackHandle.js'
+import { toggleKnitting } from './scripts/playbackHandle.js'
 import {
   popup, meditationBtn, meditationText,
   playBtn, sliderEl, descriptionCloseBtn,
-  closePopupBtn,
+  closePopupBtn, point, initialDescription
 } from './utils/constants.js'
 import { knittingSpeedHandle } from './scripts/speedHandle.js'
 
@@ -13,6 +13,11 @@ knittingSpeedHandle()
 
 function closePopup() {
   popup.classList.add('popup_dont_worry_close')
+}
+
+export function closeDescription() {
+  point.source.classList.remove('initial_point')
+  initialDescription.style.display = 'none';
 }
 
 function toggleMeditation() {
