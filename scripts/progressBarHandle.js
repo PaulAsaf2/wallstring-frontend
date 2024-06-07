@@ -1,5 +1,7 @@
 import { progBar, stepCount, points } from '../utils/constants.js'
 
+stepCount.textContent = `ШАГ 0 из ${points.length}`
+
 export function updateProgressBar(index, length) {
   let percent = Math.round(index / length * 100)
 

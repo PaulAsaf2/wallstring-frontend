@@ -27,7 +27,6 @@
 /* POINTS */
 
 .point_container {
-  /* outline: thin solid red; */
   position: absolute;
   display: flex;
   width: 102px;
@@ -94,7 +93,7 @@
 
 /* STRENGTH ARROWS */
 .arrow_a-b {
-  top: 30px;
+  top: 20px;
   display: block;
 }
 
@@ -142,27 +141,21 @@
 /* DIAGONAL ARROWS */
 
 .arrow_d-b {
-  transform: rotate(-45deg);
+  transform: rotate(-35deg);
   display: block;
 }
 
 .arrow_a-c {
-  transform: rotate(45deg);
+  transform: rotate(35deg);
   display: block;
 }
 
 .arrow_b-d {
-  transform: rotate(135deg);
+  transform: rotate(145deg);
   display: block;
 }
 
 .arrow_c-a {
-  transform: rotate(-135deg);
+  transform: rotate(-145deg);
   display: block;
-}
-
-@media screen and (max-width: 360px) {
-  .circle {
-    /* margin: 20px 0 40px 0; */
-  }
 }

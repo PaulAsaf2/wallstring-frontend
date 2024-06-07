@@ -93,10 +93,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* padding: 0 8px; */
   padding: 14% 8px 0;
   row-gap: 6vh;
-  /* outline: thin solid red; */
 }
 
 .step_section {
@@ -109,7 +107,6 @@ body {
   color: #6F6F6F;
   margin-bottom: 10px;
   min-height: 20px;
-  /* outline: thin solid red; */
 }
 
 .progress-bar_cont {
@@ -117,7 +114,6 @@ body {
   width: 100%;
   height: 4px;
   background-color: lightgray;
-  /* outline: thin solid red; */
 }
 
 .progress-bar {
@@ -133,7 +129,7 @@ body {
   padding: 10px;
   border-radius: 6px;
   background-color: #ebebebec;
-  outline: 2px solid #75715d;
+  outline: 2px solid #635d75;
   text-align: center;
   color: #6F6F6F;
   font-weight: 500;
@@ -148,13 +144,16 @@ body {
   height: 24px;
 }
 
+.description_close:hover {
+  outline: 2px solid #c02f2f;
+  background-image: url(./assets/cross-red.svg);
+}
+
 .trigger_btn {
-  /* margin: 46px 0 64px 0; */
   background-image: url(./assets/triangle.svg);
   background-repeat: no-repeat;
   background-position: 104px center;
   padding-right: 30px;
-  /* outline: thin solid red; */
 }
 
 .trigger_btn_pause {
