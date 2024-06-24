@@ -1,11 +1,12 @@
 import {
-  playBtn, delay, points, point,
+  playBtn, delay, /*points,*/ point,
 } from '../utils/constants.js'
 import { updateProgressBar } from './progressBarHandle.js'
 import { playSound } from './soundHandle.js'
 import { updatePoints } from './updatePoints.js'
 import { updateArrowDirection } from './updateArrow.js'
 import { closeDescription } from '../script.js'
+import { setCurrentStep } from './api.js'
 
 let knittingId, isKnitting = false
 
@@ -15,7 +16,7 @@ point.source.classList.add('show_point')
 point.source.classList.add('initial_point')
 
 function handleKnitting() {
-  if (!points[point.index]) {
+  if (!point.array[point.index]) {
     stopKnitting()
     return
   }
@@ -23,15 +24,16 @@ function handleKnitting() {
   updatePoints()
   updateArrowDirection()
   playSound()
-  updateProgressBar(point.index + 1, points.length)
+  updateProgressBar(point.index + 1, point.array.length)
+  setCurrentStep(point.index + 1)
 
   point.index++
 
-  if (point.index == points.length) stopKnitting()
+  if (point.index == point.array.length) stopKnitting()
 }
 
 function startKnitting() {
-  if (!points[point.index]) stopKnitting()
+  if (!point.array[point.index]) stopKnitting()
   if (point.index == 0) closeDescription()
 
   playBtn.classList.add('trigger_btn_pause')

@@ -1,4 +1,4 @@
-import { point, points } from '../utils/constants.js'
+import { point, /*points*/ } from '../utils/constants.js'
 
 function updateSourcePoint() {
   let sourceLetter = point.source.textContent.charAt(0)
@@ -14,7 +14,7 @@ function updateSourcePoint() {
 
 function updateTargetPoint() {
   let sourceLetter = point.source.textContent.charAt(0)
-  let targetLetter = points[point.index].charAt(0)
+  let targetLetter = point.array[point.index].charAt(0)
 
   if (sourceLetter == targetLetter) {
     point.target = point[`${targetLetter}2`]
@@ -23,7 +23,7 @@ function updateTargetPoint() {
     point[`${sourceLetter}2`].classList.remove('show_point')
   }
 
-  point.target.textContent = points[point.index]
+  point.target.textContent = point.array[point.index]
   point.target.classList.add(`show_point`)
 }
 

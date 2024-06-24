@@ -2,22 +2,37 @@ import { toggleKnitting } from './scripts/playbackHandle.js'
 import {
   popup, meditationBtn, meditationText,
   playBtn, sliderEl, descriptionCloseBtn,
-  closePopupBtn, point, initialDescription
+  closePopupBtn, point, initialDescription,
+  getUserDataUrl,
 } from './utils/constants.js'
 import { knittingSpeedHandle } from './scripts/speedHandle.js'
+import { getUserData } from './scripts/api.js'
 
 const tg = window.Telegram.WebApp
 
 tg.expand()
 knittingSpeedHandle()
+getUserData(getUserDataUrl)
+  .then(() => {
+    if (point.currentStep == 0) {
+      showInitialPrompts()
+    } else {
+      
+    }
+  })
+  .catch(err => console.log(err))
+
+function showInitialPrompts() {
+  popup.classList.add('popup_dont_worry_show')
+  initialDescription.classList.add('description_show')
+}
 
 function closePopup() {
-  popup.classList.add('popup_dont_worry_close')
+  popup.classList.remove('popup_dont_worry_show')
 }
 
 export function closeDescription() {
-  point.source.classList.remove('initial_point')
-  initialDescription.style.display = 'none';
+  initialDescription.classList.remove('description_show')
 }
 
 function toggleMeditation() {
