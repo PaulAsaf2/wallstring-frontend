@@ -69,13 +69,12 @@ export function toggleKnitting() {
       point.source.classList.remove('show_point')
       point.target.classList.remove('show_point')
 
-      point.source = null
-      point.target = null
-      
       resetArrows()
       updateProgressBar(point.index, point.array.length)
       setSourcePoint(true)
       stopKnitting()
+
+      isEnd = false
 
     } else {
       startKnitting()
