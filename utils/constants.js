@@ -107,7 +107,6 @@ export {
   closePopupBtn,
   delay,
   sliderEl,
-  // points,
   arrow,
   detectSounds,
   progBar,
@@ -116,5 +115,4 @@ export {
   initialDescription,
   descriptionCloseBtn,
   getUserDataUrl,
-  // setCount,
 }

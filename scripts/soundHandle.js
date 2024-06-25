@@ -1,4 +1,4 @@
-import { detectSounds, delay, /*points,*/ point } from '../utils/constants.js'
+import { detectSounds, delay, point } from '../utils/constants.js'
 
 let sound = new Howl({
   src: ['./audio/wallstingpoints.mp3'],

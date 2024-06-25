@@ -1,4 +1,4 @@
-import { point, /*points*/ } from '../utils/constants.js'
+import { point } from '../utils/constants.js'
 
 export function setSourcePoint(isInitialPoint) {
   if (isInitialPoint) {
@@ -48,5 +48,6 @@ export function updatePoints() {
   }
 
   updateTargetPoint()
+  point.source.classList.remove('initial_point')
   point.initial = false
 }

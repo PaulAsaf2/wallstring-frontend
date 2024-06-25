@@ -1,5 +1,5 @@
 import {
-  playBtn, delay, /*points,*/ point,
+  playBtn, delay, point,
 } from '../utils/constants.js'
 import { updateProgressBar } from './progressBarHandle.js'
 import { playSound } from './soundHandle.js'
@@ -39,7 +39,7 @@ function startKnitting() {
   handleKnitting()
 }
 
-function stopKnitting() {
+export function stopKnitting() {
   playBtn.textContent = 'Старт'
   playBtn.classList.remove('trigger_btn_pause')
 
