@@ -10,11 +10,6 @@ import { setCurrentStep } from './api.js'
 
 let knittingId, isKnitting = false
 
-point.source = point.B
-point.source.textContent = 'B31'
-point.source.classList.add('show_point')
-point.source.classList.add('initial_point')
-
 function handleKnitting() {
   if (!point.array[point.index]) {
     stopKnitting()

@@ -7,6 +7,8 @@ import {
 } from './utils/constants.js'
 import { knittingSpeedHandle } from './scripts/speedHandle.js'
 import { getUserData } from './scripts/api.js'
+import { setSourcePoint } from './scripts/updatePoints.js'
+import { updateProgressBar } from './scripts/progressBarHandle.js'
 
 const tg = window.Telegram.WebApp
 
@@ -14,10 +16,13 @@ tg.expand()
 knittingSpeedHandle()
 getUserData(getUserDataUrl)
   .then(() => {
+    updateProgressBar(point.currentStep, point.array.length)
+
     if (point.currentStep == 0) {
       showInitialPrompts()
+      setSourcePoint(true) // set initial point
     } else {
-      
+      setSourcePoint(false) // set current point
     }
   })
   .catch(err => console.log(err))

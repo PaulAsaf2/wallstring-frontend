@@ -19,6 +19,7 @@ const point = {
   index: 0,
   currentStep: 0,
   array: '',
+  initial: false,
   A: document.getElementById('point-a'),
   B: document.getElementById('point-b'),
   C: document.getElementById('point-c'),

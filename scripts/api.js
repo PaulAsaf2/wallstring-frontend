@@ -14,9 +14,12 @@ export function getUserData(link) {
 
 function retrieveCurrentStep(userData) {
   point.currentStep = userData[0].count
+  point.index = userData[0].count
 }
 
 export function retrievePoints(userData) {
+  console.log(userData[0].code.split(/\s+/));
+
   point.array = userData[0].code.split(/\s+/)
 }
 
@@ -27,6 +30,6 @@ export function setCurrentStep(step) {
       if (response.ok) return response.json()
       throw new Error('Network reponse was not ok')
     })
-    .then(data => retrievePoints(data))
+    .then(data => console.log(data))
     .catch(err => console.log(err))
 }
