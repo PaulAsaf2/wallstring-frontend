@@ -3,12 +3,12 @@ import {
 } from '../utils/constants.js'
 import { updateProgressBar } from './progressBarHandle.js'
 import { playSound } from './soundHandle.js'
-import { updatePoints } from './updatePoints.js'
-import { updateArrowDirection } from './updateArrow.js'
+import { updatePoints, setSourcePoint } from './updatePoints.js'
+import { updateArrowDirection, resetArrows } from './updateArrow.js'
 import { closeDescription } from '../script.js'
 import { setCurrentStep } from './api.js'
 
-let knittingId, isKnitting = false
+let knittingId, isKnitting = false, isEnd = false
 
 function handleKnitting() {
   if (!point.array[point.index]) {
@@ -24,7 +24,9 @@ function handleKnitting() {
 
   point.index++
 
-  if (point.index == point.array.length) stopKnitting()
+  if (point.index == point.array.length) {
+    stopKnitting()
+  }
 }
 
 function startKnitting() {
@@ -40,8 +42,15 @@ function startKnitting() {
 }
 
 export function stopKnitting() {
-  playBtn.textContent = 'Старт'
   playBtn.classList.remove('trigger_btn_pause')
+
+  if (point.index == point.array.length) {
+    playBtn.textContent = 'Сначала'
+    playBtn.classList.add('trigger_btn_reload')
+    isEnd = true
+  } else {
+    playBtn.textContent = 'Старт'
+  }
 
   clearTimeout(knittingId)
 
@@ -50,13 +59,33 @@ export function stopKnitting() {
 
 export function toggleKnitting() {
   if (!isKnitting) {
-    startKnitting()
+    if (isEnd) {
+      point.index = 0
+      point.currentStep = 0
 
-    knittingId = setTimeout(function startInterval() {
-      handleKnitting()
+      playBtn.textContent = 'Старт'
+      playBtn.classList.remove('trigger_btn_reload')
 
-      knittingId = setTimeout(startInterval, delay.betweenPoints)
-    }, delay.betweenPoints)
+      point.source.classList.remove('show_point')
+      point.target.classList.remove('show_point')
+
+      point.source = null
+      point.target = null
+      
+      resetArrows()
+      updateProgressBar(point.index, point.array.length)
+      setSourcePoint(true)
+      stopKnitting()
+
+    } else {
+      startKnitting()
+
+      knittingId = setTimeout(function startInterval() {
+        handleKnitting()
+
+        knittingId = setTimeout(startInterval, delay.betweenPoints)
+      }, delay.betweenPoints)
+    }
   } else {
     stopKnitting()
   }

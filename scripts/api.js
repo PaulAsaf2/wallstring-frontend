@@ -14,8 +14,13 @@ export function getUserData(link) {
 }
 
 function retrieveCurrentStep(userData) {
-  point.currentStep = userData[0].count
-  point.index = userData[0].count
+  if (userData[0].count == userData[0].code.split(/\s+/).length) {
+    point.currentStep = 0
+    point.index = 0
+  } else {
+    point.currentStep = userData[0].count
+    point.index = userData[0].count
+  }
 }
 
 export function retrievePoints(userData) {

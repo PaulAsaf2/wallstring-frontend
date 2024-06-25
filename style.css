@@ -165,6 +165,11 @@ body {
   background-image: url(./assets/pause.svg);
 }
 
+.trigger_btn_reload {
+  background-image: url(./assets/refresh.svg);
+  padding-right: 40px;
+}
+
 @media screen and (min-height: 680px) {
   .main {
     padding: 15% 8px 0;
