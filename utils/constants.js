@@ -9,6 +9,7 @@ const progBar = document.querySelector('.progress-bar')
 const stepCount = document.querySelector('.step')
 const initialDescription = document.querySelector('.description')
 const descriptionCloseBtn = document.querySelector('.description_close')
+const tg = window.Telegram.WebApp
 const delay = {
   betweenPoints: 1000,
   insidePoint: 300,
@@ -30,7 +31,10 @@ const point = {
   target: null,
 }
 const getUserDataUrl = 'https://pin.sourctech.ru/telegram/string/getCodeApp.php?userId=123&promocode=0ZL-N88-CWZ-BD3'
-
+const user = {
+  tgId: null,
+  promocode: null,
+}
 const detectSounds = {
   A: [0, 580],
   B: [470, 580],
@@ -113,4 +117,6 @@ export {
   initialDescription,
   descriptionCloseBtn,
   getUserDataUrl,
+  tg,
+  user,
 }

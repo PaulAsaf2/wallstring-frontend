@@ -1,5 +1,18 @@
-import { point } from '../utils/constants.js'
+import { point, tg, user } from '../utils/constants.js'
 import { stopKnitting } from './playbackHandle.js'
+
+export function getAuthData() {
+  const queryString = window.location.search
+  const urlParams = new URLSearchParams(queryString)
+  const promocode = urlParams.get('promocode')
+
+  const userId = tg?.initDataUnsafe?.user?.id
+
+  user.promocode = promocode
+  user.tgId = userId
+
+  console.log(user);
+}
 
 export function getUserData(link) {
   return fetch(link)
@@ -24,8 +37,6 @@ function retrieveCurrentStep(userData) {
 }
 
 export function retrievePoints(userData) {
-  console.log(userData[0].code.split(/\s+/));
-
   point.array = userData[0].code.split(/\s+/)
 }
 

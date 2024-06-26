@@ -3,18 +3,14 @@ import {
   popup, meditationBtn, meditationText,
   playBtn, sliderEl, descriptionCloseBtn,
   closePopupBtn, point, initialDescription,
-  getUserDataUrl,
+  getUserDataUrl, tg, user,
 } from './utils/constants.js'
 import { knittingSpeedHandle } from './scripts/speedHandle.js'
-import { getUserData } from './scripts/api.js'
+import { getUserData, getAuthData } from './scripts/api.js'
 import { setSourcePoint } from './scripts/updatePoints.js'
 import { updateProgressBar } from './scripts/progressBarHandle.js'
 
-const tg = window.Telegram.WebApp
-
-const queryString = window.location.search
-const urlParams = new URLSearchParams(queryString)
-const promocode = urlParams.get('promocode')
+getAuthData()
 
 tg.expand()
 knittingSpeedHandle()
