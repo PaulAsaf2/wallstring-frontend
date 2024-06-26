@@ -1,7 +1,7 @@
 import { detectSounds, delay, point } from '../utils/constants.js'
 
 let sound = new Howl({
-  src: ['./audio/wallstingpoints.mp3'],
+  src: ['./assets/audio/wallstingpoints.mp3'],
   sprite: detectSounds,
 })
 
