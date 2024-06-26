@@ -1,28 +1,40 @@
-import { point, tg, user } from '../utils/constants.js'
+import { point, tg, knittingUrl, user } from '../utils/constants.js'
 import { stopKnitting } from './playbackHandle.js'
 
-export function getAuthData() {
-  const queryString = window.location.search
-  const urlParams = new URLSearchParams(queryString)
-  const promocode = urlParams.get('promocode')
+export function getUserData() {
+  return new Promise((resolve, reject) => {
+    const queryString = window.location.search
+    const urlParams = new URLSearchParams(queryString)
+    const promocode = urlParams.get('promocode')
+    // const userId = tg?.initDataUnsafe?.user?.id
+    const userId = '123'
 
-  const userId = tg?.initDataUnsafe?.user?.id
+    if (userId && promocode) {
+      user.tgId = userId
+      user.promocode = promocode
 
-  user.promocode = promocode
-  user.tgId = userId
-
-  console.log(user);
+      resolve({ userId, promocode })
+    } else {
+      reject(new Error('Failed to retrieve data: promocode or userId missing'))
+    }
+  })
 }
 
-export function getUserData(link) {
-  return fetch(link)
+export function getKnittingData(props) {
+  const params = new URLSearchParams(props)
+
+  return fetch(knittingUrl + 'getCodeApp.php?' + params)
     .then(response => {
       if (response.ok) return response.json()
       throw new Error('Network reponse was not ok')
     })
     .then(data => {
-      retrievePoints(data)
-      retrieveCurrentStep(data)
+      if (data) {
+        retrievePoints(data)
+        retrieveCurrentStep(data)
+      } else {
+        throw new Error('No knitting data available')
+      }
     })
 }
 
@@ -42,8 +54,13 @@ export function retrievePoints(userData) {
 
 export function setCurrentStep(step, retryCount = 0) {
   const maxRetryCount = 0
-  const setStepUrl = `https://pin.sourctech.ru/telegram/string/setCountApp.php?userId=123&promocode=0ZL-N88-CWZ-BD3&newCount=${step}`
-  fetch(setStepUrl)
+  const params = new URLSearchParams({
+    userId: user.tgId,
+    promocode: user.promocode,
+    newCount: step
+  })
+  
+  fetch(knittingUrl + 'setCountApp.php?' + params)
     .then(response => {
       if (response.ok) return response.json()
       throw new Error('Network reponse was not ok')

@@ -30,7 +30,7 @@ const point = {
   source: null,
   target: null,
 }
-const getUserDataUrl = 'https://pin.sourctech.ru/telegram/string/getCodeApp.php?userId=123&promocode=0ZL-N88-CWZ-BD3'
+const knittingUrl = 'https://pin.sourctech.ru/telegram/string/'
 const user = {
   tgId: null,
   promocode: null,
@@ -116,7 +116,7 @@ export {
   point,
   initialDescription,
   descriptionCloseBtn,
-  getUserDataUrl,
+  knittingUrl,
   tg,
   user,
 }

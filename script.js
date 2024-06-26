@@ -3,27 +3,30 @@ import {
   popup, meditationBtn, meditationText,
   playBtn, sliderEl, descriptionCloseBtn,
   closePopupBtn, point, initialDescription,
-  getUserDataUrl, tg, user,
+  tg,
 } from './utils/constants.js'
 import { knittingSpeedHandle } from './scripts/speedHandle.js'
-import { getUserData, getAuthData } from './scripts/api.js'
+import { getUserData, getKnittingData } from './scripts/api.js'
 import { setSourcePoint } from './scripts/updatePoints.js'
 import { updateProgressBar } from './scripts/progressBarHandle.js'
 
-getAuthData()
-
 tg.expand()
-knittingSpeedHandle()
-getUserData(getUserDataUrl)
-  .then(() => {
-    updateProgressBar(point.currentStep, point.array.length)
 
-    if (point.currentStep == 0) {
-      showInitialPrompts()
-      setSourcePoint(true) // set initial point
-    } else {
-      setSourcePoint(false) // set current point
-    }
+getUserData()
+  .then(data => {
+    getKnittingData(data)
+      .then(() => {
+        updateProgressBar(point.currentStep, point.array.length)
+        knittingSpeedHandle()
+
+        if (point.currentStep == 0) {
+          showInitialPrompts()
+          setSourcePoint(true) // set initial point
+        } else {
+          setSourcePoint(false) // set current point
+        }
+      })
+      .catch(err => console.log(err))
   })
   .catch(err => console.log(err))
 
