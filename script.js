@@ -12,6 +12,10 @@ import { updateProgressBar } from './scripts/progressBarHandle.js'
 
 const tg = window.Telegram.WebApp
 
+const queryString = window.location.search
+const urlParams = new URLSearchParams(queryString)
+const promocode = urlParams.get('promocode')
+
 tg.expand()
 knittingSpeedHandle()
 getUserData(getUserDataUrl)
