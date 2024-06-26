@@ -44,9 +44,11 @@ function startKnitting() {
 export function stopKnitting() {
   playBtn.classList.remove('trigger_btn_pause')
 
+  // End of points array?
   if (point.index == point.array.length) {
     playBtn.textContent = 'Сначала'
     playBtn.classList.add('trigger_btn_reload')
+
     isEnd = true
   } else {
     playBtn.textContent = 'Старт'
@@ -57,34 +59,39 @@ export function stopKnitting() {
   isKnitting = false
 }
 
+function resetKnitting() {
+  point.index = 0
+  point.currentStep = 0
+
+  playBtn.textContent = 'Старт'
+  playBtn.classList.remove('trigger_btn_reload')
+
+  point.source.classList.remove('show_point')
+  point.target.classList.remove('show_point')
+
+  resetArrows()
+  updateProgressBar(point.index, point.array.length)
+  setSourcePoint(true)
+  setCurrentStep(0)
+  stopKnitting()
+
+  isEnd = false
+}
+
 export function toggleKnitting() {
   if (!isKnitting) {
     if (isEnd) {
-      point.index = 0
-      point.currentStep = 0
-
-      playBtn.textContent = 'Старт'
-      playBtn.classList.remove('trigger_btn_reload')
-
-      point.source.classList.remove('show_point')
-      point.target.classList.remove('show_point')
-
-      resetArrows()
-      updateProgressBar(point.index, point.array.length)
-      setSourcePoint(true)
-      stopKnitting()
-
-      isEnd = false
-
-    } else {
-      startKnitting()
-
-      knittingId = setTimeout(function startInterval() {
-        handleKnitting()
-
-        knittingId = setTimeout(startInterval, delay.betweenPoints)
-      }, delay.betweenPoints)
+      resetKnitting()
+      return
     }
+
+    startKnitting()
+
+    knittingId = setTimeout(function startInterval() {
+      handleKnitting()
+
+      knittingId = setTimeout(startInterval, delay.betweenPoints)
+    }, delay.betweenPoints)
   } else {
     stopKnitting()
   }
