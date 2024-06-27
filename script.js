@@ -28,7 +28,17 @@ getUserData()
       })
       .catch(err => console.log(err))
   })
-  .catch(err => console.log(err))
+  .catch(err => {
+    console.log(err)
+    tg.showConfirm('Приложению не удалось считать данные пользователя. Хотите выполнить перезагрузку?', (yes) => {
+      if (yes) {
+        getUserData()
+        console.log('Повторная загрузка данных');
+      } else {
+        console.log('Вы нажали "нет"');
+      }
+    })
+  })
 
 function showInitialPrompts() {
   popup.classList.add('popup_dont_worry_show')
