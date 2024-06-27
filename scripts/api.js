@@ -6,8 +6,7 @@ export function getUserData() {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     const promocode = urlParams.get('promocode')
-    // const userId = tg?.initDataUnsafe?.user?.id
-    const userId = '123'
+    const userId = tg?.initDataUnsafe?.user?.id
 
     if (userId && promocode) {
       user.tgId = userId
