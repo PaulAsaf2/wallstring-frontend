@@ -26,9 +26,17 @@ getUserData()
           setSourcePoint(false) // set current point
         }
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err)
+        alert(err.message)
+        // tg.showAlert(err.message)
+      })
   })
-  .catch(err => console.log(err))
+  .catch(err => {
+    console.log(err)
+    alert(err.message)
+    // tg.showAlert(err.message)
+  })
 
 function showInitialPrompts() {
   popup.classList.add('popup_dont_worry_show')

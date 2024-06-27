@@ -6,7 +6,8 @@ export function getUserData() {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     const promocode = urlParams.get('promocode')
-    const userId = tg?.initDataUnsafe?.user?.id
+    // const userId = tg?.initDataUnsafe?.user?.id
+    const userId = '123'
 
     if (userId && promocode) {
       user.tgId = userId
@@ -14,7 +15,7 @@ export function getUserData() {
 
       resolve({ userId, promocode })
     } else {
-      reject(new Error('Failed to retrieve data: promocode or userId missing'))
+      reject(new Error('Ошибка получения данных: promocode или userId отсутствуют.'))
     }
   })
 }
@@ -25,14 +26,14 @@ export function getKnittingData(props) {
   return fetch(knittingUrl + 'getCodeApp.php?' + params)
     .then(response => {
       if (response.ok) return response.json()
-      throw new Error('Network reponse was not ok')
+      throw new Error('Запрос на получение координат не был успешно выполнен.')
     })
     .then(data => {
       if (data) {
         retrievePoints(data)
         retrieveCurrentStep(data)
       } else {
-        throw new Error('No knitting data available')
+        throw new Error('Ответ не содержит данных.')
       }
     })
 }
