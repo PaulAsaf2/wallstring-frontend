@@ -10,7 +10,7 @@ import { setCurrentStep } from './api.js'
 
 let knittingId, isKnitting = false, isEnd = false
 
-function handleKnitting() {
+async function handleKnitting() {
   if (!point.array[point.index]) {
     stopKnitting()
     return
@@ -20,13 +20,29 @@ function handleKnitting() {
   updateArrowDirection()
   playSound()
   updateProgressBar(point.index + 1, point.array.length)
-  setCurrentStep(point.index + 1)
 
-  point.index++
+  try {
+    const stepIsSaved = await setCurrentStep(point.index + 1)
+    console.log(stepIsSaved);
+    point.index++
 
-  if (point.index == point.array.length) {
+    if (point.index == point.array.length) {
+      stopKnitting()
+      return
+    }
+
+    if (isKnitting) {
+      continueKnitting()
+    }
+  } catch (err) {
+    console.log('Не удалось сохранить точку ' + point.array[point.index]);
+    console.log(err)
     stopKnitting()
   }
+}
+
+function continueKnitting() {
+  knittingId = setTimeout(handleKnitting, delay.betweenPoints)
 }
 
 function startKnitting() {
@@ -86,12 +102,6 @@ export function toggleKnitting() {
     }
 
     startKnitting()
-
-    knittingId = setTimeout(function startInterval() {
-      handleKnitting()
-
-      knittingId = setTimeout(startInterval, delay.betweenPoints)
-    }, delay.betweenPoints)
   } else {
     stopKnitting()
   }

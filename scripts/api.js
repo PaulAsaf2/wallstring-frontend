@@ -6,7 +6,8 @@ export function getUserData() {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     const promocode = urlParams.get('promocode')
-    const userId = tg?.initDataUnsafe?.user?.id
+    // const userId = tg?.initDataUnsafe?.user?.id
+    const userId = '123'
 
     if (userId && promocode) {
       user.tgId = userId
@@ -49,33 +50,38 @@ function retrieveCurrentStep(userData) {
 
 export function retrievePoints(userData) {
   point.array = userData[0].code.split(/\s+/)
+
+  console.log(point.array);
 }
 
-export function setCurrentStep(step, retryCount = 0) {
-  const maxRetryCount = 0
+export async function setCurrentStep(step) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const success = true
+
+      if (success) {
+        resolve({ success: true, message: "Count updated successfully" })
+      } else {
+        reject('Something went wrong')
+      }
+    }, 2000)
+  })
+
+  /*
   const params = new URLSearchParams({
     userId: user.tgId,
     promocode: user.promocode,
     newCount: step
   })
-  
-  fetch(knittingUrl + 'setCountApp.php?' + params)
+
+  return fetch(knittingUrl + 'setCountApp.php?' + params)
     .then(response => {
       if (response.ok) return response.json()
-      throw new Error('Network reponse was not ok')
+      throw new Error('Не можем связаться с сервером для сохранения точки ')
     })
     .then(data => {
-      if (data.success) return console.log(data)
-      throw Error('An error occurred when saving the Count №' + step)
+      if (data.success) return data.success
+      throw Error('Произошла ошибка при сохранении точки ')
     })
-    .catch(err => {
-      console.log(err)
-      if (retryCount < maxRetryCount) {
-        console.log(`Retrying... Atempt ${retryCount}`);
-        setCurrentStep(step, retryCount + 1)
-      } else {
-        console.log('Max retry attempts reached. We could not save a point №' + step);
-        stopKnitting()
-      }
-    })
+  */
 }
