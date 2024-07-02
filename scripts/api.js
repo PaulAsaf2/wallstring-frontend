@@ -111,7 +111,7 @@ export async function setCurrentStep(step, attempt = 0, maxAttemts = 3, delay = 
       } else {
         showErrorMessage(
           'Ошибка при связи с сервером.',
-          `Не удаётся связаться с сервером для корректной работы приложения. Попробуйте зайти позже.`,
+          `Попробуйте зайти позже. Вы остановились на точке ${point.array[point.index - 1]}`,
           true
         )
         throw new Error('Max attemts reached')

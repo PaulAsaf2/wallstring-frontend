@@ -7,6 +7,7 @@ import { updatePoints, setSourcePoint } from './updatePoints.js'
 import { updateArrowDirection, resetArrows } from './updateArrow.js'
 import { closeDescription } from '../script.js'
 import { setCurrentStep } from './api.js'
+import { countdown } from './errorHandle.js'
 
 async function handleKnitting() {
   if (!point.array[point.index]) {
@@ -49,6 +50,8 @@ function startKnitting() {
   playBtn.textContent = 'Пауза'
 
   knitting.play = true
+
+  countdown(10) // temporary
 
   handleKnitting()
 }

@@ -185,6 +185,12 @@ body {
   padding-right: 40px;
 }
 
+.test_cont {
+  background-color: rgba(189, 141, 141, 0.8);
+  position: fixed;
+  top: 20%;
+}
+
 @media screen and (min-height: 680px) {
   .main {
     padding: 15% 8px 0;

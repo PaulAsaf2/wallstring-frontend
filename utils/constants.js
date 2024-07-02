@@ -14,6 +14,10 @@ const progBar = document.querySelector('.progress-bar')
 const stepCount = document.querySelector('.step')
 const initialDescription = document.querySelector('.description')
 const descriptionCloseBtn = document.querySelector('.description_close')
+
+const testCont = document.querySelector('.test_cont')
+const testText = document.querySelector('.test_text')
+
 const tg = window.Telegram.WebApp
 const delay = {
   betweenPoints: 1000,
@@ -46,7 +50,7 @@ const user = {
   promocode: null,
 }
 const test = {
-  test: false,
+  test: true,
 }
 const detectSounds = {
   A: [0, 580],
@@ -139,4 +143,6 @@ export {
   iconProcess,
   iconWarning,
   test,
+  testCont,
+  testText,
 }
