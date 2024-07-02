@@ -1,5 +1,6 @@
-import { point, tg, knittingUrl, user, knitting } from '../utils/constants.js'
+import { point, tg, knittingUrl, user, knitting, test, } from '../utils/constants.js'
 import { stopKnitting } from './playbackHandle.js'
+import { showErrorMessage } from './errorHandle.js'
 
 export function getUserData() {
   return new Promise((resolve, reject) => {
@@ -64,11 +65,11 @@ function mockFetch() {
       const success = true
 
       if (success) {
-        resolve({ ok: false })
+        resolve({ ok: test.test })
       } else {
         reject('Request failed')
       }
-    }, 2000)
+    }, 100)
   })
 }
 
@@ -76,9 +77,9 @@ function wait(ms) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-export async function setCurrentStep(step, attempt = 1, maxAttemts = 3, delay = 1000) {
+export async function setCurrentStep(step, attempt = 0, maxAttemts = 3, delay = 1000) {
   console.log(`Attempt ${attempt} of ${maxAttemts}`)
-  
+
   return mockFetch()
     .then(response => {
       if (response.ok) {
@@ -93,15 +94,26 @@ export async function setCurrentStep(step, attempt = 1, maxAttemts = 3, delay = 
     })
     .catch(error => {
       if (knitting.play) stopKnitting()
-      
+
       console.log(error)
-      
+
       if (attempt < maxAttemts) {
         let nexDelay = delay * 2
         console.log(`Retrying... (${attempt + 1} of ${maxAttemts} in ${nexDelay / 1000} sec)`);
 
-        return wait(nexDelay).then(() => setCurrentStep(step, attempt + 1, maxAttemts, nexDelay)) 
+        showErrorMessage(
+          'Ошибка при связи с сервером.',
+          `Попытка ${attempt + 1} из ${maxAttemts}`,
+          false
+        )
+
+        return wait(nexDelay).then(() => setCurrentStep(step, attempt + 1, maxAttemts, nexDelay))
       } else {
+        showErrorMessage(
+          'Ошибка при связи с сервером.',
+          `Не удаётся связаться с сервером для корректной работы приложения. Попробуйте зайти позже.`,
+          true
+        )
         throw new Error('Max attemts reached')
       }
     })

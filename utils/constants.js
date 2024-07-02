@@ -1,4 +1,9 @@
 const popup = document.querySelector('.popup_fullwidth')
+const errorPopup = document.querySelector('.popup_fullwidth_error')
+const errorTitle = document.querySelector('.error_title')
+const errorSubtitle = document.querySelector('.error_subtitle')
+const iconProcess = document.querySelector('.icon_process')
+const iconWarning = document.querySelector('.icon_warning')
 const meditationBtn = document.querySelector('.meditaion_btn_off')
 const meditationText = document.querySelector('.meditation_text')
 const closePopupBtn = document.querySelector('.close_popup_btn')
@@ -39,6 +44,9 @@ const knittingUrl = 'https://pin.sourctech.ru/telegram/string/'
 const user = {
   tgId: null,
   promocode: null,
+}
+const test = {
+  test: false,
 }
 const detectSounds = {
   A: [0, 580],
@@ -125,4 +133,10 @@ export {
   tg,
   user,
   knitting,
+  errorPopup,
+  errorTitle,
+  errorSubtitle,
+  iconProcess,
+  iconWarning,
+  test,
 }
