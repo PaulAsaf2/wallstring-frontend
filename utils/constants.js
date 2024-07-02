@@ -1,4 +1,4 @@
-const popup = document.querySelector('.popup_dont_worry')
+const popup = document.querySelector('.popup_fullwidth')
 const meditationBtn = document.querySelector('.meditaion_btn_off')
 const meditationText = document.querySelector('.meditation_text')
 const closePopupBtn = document.querySelector('.close_popup_btn')
@@ -29,6 +29,11 @@ const point = {
   D2: document.getElementById('second-d'),
   source: null,
   target: null,
+}
+const knitting = {
+  play: false,
+  end: false,
+  id: '',
 }
 const knittingUrl = 'https://pin.sourctech.ru/telegram/string/'
 const user = {
@@ -119,4 +124,5 @@ export {
   knittingUrl,
   tg,
   user,
+  knitting,
 }

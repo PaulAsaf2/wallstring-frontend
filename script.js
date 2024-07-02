@@ -31,12 +31,12 @@ getUserData()
   .catch(err => console.log(err))
 
 function showInitialPrompts() {
-  popup.classList.add('popup_dont_worry_show')
+  popup.classList.add('popup_fullwidth_show')
   initialDescription.classList.add('description_show')
 }
 
 function closePopup() {
-  popup.classList.remove('popup_dont_worry_show')
+  popup.classList.remove('popup_fullwidth_show')
 }
 
 export function closeDescription() {

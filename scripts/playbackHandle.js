@@ -1,5 +1,5 @@
 import {
-  playBtn, delay, point,
+  playBtn, delay, point, knitting,
 } from '../utils/constants.js'
 import { updateProgressBar } from './progressBarHandle.js'
 import { playSound } from './soundHandle.js'
@@ -8,41 +8,37 @@ import { updateArrowDirection, resetArrows } from './updateArrow.js'
 import { closeDescription } from '../script.js'
 import { setCurrentStep } from './api.js'
 
-let knittingId, isKnitting = false, isEnd = false
-
 async function handleKnitting() {
   if (!point.array[point.index]) {
     stopKnitting()
     return
   }
 
-  updatePoints()
-  updateArrowDirection()
-  playSound()
-  updateProgressBar(point.index + 1, point.array.length)
+  setCurrentStep(point.index + 1)
+    .then(() => {
+      updatePoints()
+      updateArrowDirection()
+      playSound()
+      updateProgressBar(point.index + 1, point.array.length)
 
-  try {
-    const stepIsSaved = await setCurrentStep(point.index + 1)
-    console.log(stepIsSaved);
-    point.index++
+      point.index++
 
-    if (point.index == point.array.length) {
-      stopKnitting()
-      return
-    }
+      if (point.index == point.array.length) {
+        stopKnitting()
+        return
+      }
 
-    if (isKnitting) {
-      continueKnitting()
-    }
-  } catch (err) {
-    console.log('Не удалось сохранить точку ' + point.array[point.index]);
-    console.log(err)
-    stopKnitting()
-  }
+      if (knitting.play) {
+        continueKnitting()
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    })
 }
 
 function continueKnitting() {
-  knittingId = setTimeout(handleKnitting, delay.betweenPoints)
+  knitting.id = setTimeout(handleKnitting, delay.betweenPoints)
 }
 
 function startKnitting() {
@@ -52,7 +48,7 @@ function startKnitting() {
   playBtn.classList.add('trigger_btn_pause')
   playBtn.textContent = 'Пауза'
 
-  isKnitting = true
+  knitting.play = true
 
   handleKnitting()
 }
@@ -65,14 +61,14 @@ export function stopKnitting() {
     playBtn.textContent = 'Сначала'
     playBtn.classList.add('trigger_btn_reload')
 
-    isEnd = true
+    knitting.end = true
   } else {
     playBtn.textContent = 'Старт'
   }
 
-  clearTimeout(knittingId)
+  clearTimeout(knitting.id)
 
-  isKnitting = false
+  knitting.play = false
 }
 
 function resetKnitting() {
@@ -91,17 +87,16 @@ function resetKnitting() {
   setCurrentStep(0)
   stopKnitting()
 
-  isEnd = false
+  knitting.end = false
 }
 
 export function toggleKnitting() {
-  if (!isKnitting) {
-    if (isEnd) {
+  if (!knitting.play) {
+    if (knitting.end) {
       resetKnitting()
-      return
+    } else {
+      startKnitting()
     }
-
-    startKnitting()
   } else {
     stopKnitting()
   }
