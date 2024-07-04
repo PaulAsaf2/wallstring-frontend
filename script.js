@@ -10,6 +10,16 @@ import { getUserData, getKnittingData } from './scripts/api.js'
 import { setSourcePoint } from './scripts/updatePoints.js'
 import { updateProgressBar } from './scripts/progressBarHandle.js'
 
+tg.WebApp.onEvent('error', function (event) {
+  console.error('Error occurred:', event);
+});
+tg.WebApp.onEvent('incoming_event', function (event) {
+  console.log('Incoming event:', event);
+});
+tg.WebApp.onEvent('outgoing_event', function (event) {
+  console.log('Outgoing event:', event);
+});
+
 tg.expand()
 
 getUserData()
