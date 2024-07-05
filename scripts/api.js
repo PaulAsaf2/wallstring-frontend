@@ -55,70 +55,11 @@ export function retrievePoints(userData) {
   console.log(point.array);
 }
 
-function mockData() {
-  return { success: true, message: "Count updated successfully" }
-}
-
-function mockFetch() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const success = true
-
-      if (success) {
-        resolve({ ok: test.test })
-      } else {
-        reject('Request failed')
-      }
-    }, 100)
-  })
-}
-
 function wait(ms) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-export async function setCurrentStep(step, attempt = 0, maxAttemts = 3, delay = 1000) {
-  console.log(`Attempt ${attempt} of ${maxAttemts}`)
-
-  return mockFetch()
-    .then(response => {
-      if (response.ok) {
-        return mockData()
-      }
-      throw new Error('Response not ok')
-    })
-    .then(data => {
-      if (!data.success) {
-        throw Error('An error occurred while saving a point')
-      }
-    })
-    .catch(error => {
-      if (knitting.play) stopKnitting()
-
-      console.log(error)
-
-      if (attempt < maxAttemts) {
-        let nexDelay = delay * 2
-        console.log(`Retrying... (${attempt + 1} of ${maxAttemts} in ${nexDelay / 1000} sec)`);
-
-        showErrorMessage(
-          'Ошибка при связи с сервером.',
-          `Попытка ${attempt + 1} из ${maxAttemts}`,
-          false
-        )
-
-        return wait(nexDelay).then(() => setCurrentStep(step, attempt + 1, maxAttemts, nexDelay))
-      } else {
-        showErrorMessage(
-          'Ошибка при связи с сервером.',
-          `Попробуйте зайти позже. Вы остановились на точке ${point.array[point.index - 1]}`,
-          true
-        )
-        throw new Error('Max attemts reached')
-      }
-    })
-
-  /*
+export function setCurrentStep(step, attempt = 0, maxAttemts = 3, delay = 1000) {
   const params = new URLSearchParams({
     userId: user.tgId,
     promocode: user.promocode,
@@ -128,11 +69,37 @@ export async function setCurrentStep(step, attempt = 0, maxAttemts = 3, delay = 
   return fetch(knittingUrl + 'setCountApp.php?' + params)
     .then(response => {
       if (response.ok) return response.json()
-      throw new Error('Не можем связаться с сервером для сохранения точки ')
+      throw new Error('Response not ok')
     })
     .then(data => {
-      if (data.success) return data.success
-      throw Error('Произошла ошибка при сохранении точки ')
+      if (data.success) return console.log(data)
+      throw Error('An error occurred while saving a point')
     })
-  */
+    .catch(error => {
+      console.log(error)
+
+      if (knitting.play) stopKnitting()
+
+      if (attempt < maxAttemts) {
+        console.log(`Retrying... (${attempt + 1} of ${maxAttemts})`);
+
+        showErrorMessage(
+          'Ошибка при связи с сервером.',
+          `Попытка ${attempt + 1} из ${maxAttemts}`,
+          false // попытки закончились
+        )
+
+        let nexDelay = delay * 2
+
+        return wait(nexDelay)
+          .then(() => setCurrentStep(step, attempt + 1, maxAttemts, nexDelay))
+      } else {
+        showErrorMessage(
+          'Ошибка при связи с сервером.',
+          `Попробуйте зайти позже. Вы остановились на точке ${point.array[point.index - 1]}`,
+          true // попытки закончились
+        )
+        throw new Error('Max attemts reached')
+      }
+    })
 }
