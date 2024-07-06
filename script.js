@@ -9,6 +9,7 @@ import { knittingSpeedHandle } from './scripts/speedHandle.js'
 import { getUserData, getKnittingData } from './scripts/api.js'
 import { setSourcePoint } from './scripts/updatePoints.js'
 import { updateProgressBar } from './scripts/progressBarHandle.js'
+import { showErrorMessage, hideErrorMessage } from './scripts/errorHandle.js'
 
 tg.expand()
 
@@ -53,3 +54,13 @@ meditationBtn.addEventListener('click', toggleMeditation)
 sliderEl.addEventListener('input', knittingSpeedHandle)
 descriptionCloseBtn.addEventListener('click', closeDescription)
 closePopupBtn.addEventListener('click', closePopup)
+window.addEventListener('offline', function() {
+  showErrorMessage(
+    'Нет подключения к интернету',
+    `Вы остановились на точке ${point.array[point.index - 1]}`,
+    true // попытки закончились
+  )
+})
+window.addEventListener('online', function() {
+  hideErrorMessage()
+})

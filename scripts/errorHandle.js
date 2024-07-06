@@ -16,3 +16,7 @@ export function showErrorMessage(title, subtitle, maxAttemts) {
     iconWarning.style.display = 'none'
   }
 }
+
+export function hideErrorMessage() {
+  errorPopup.classList.remove('popup_fullwidth_show')
+}
