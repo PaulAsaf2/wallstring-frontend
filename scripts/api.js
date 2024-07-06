@@ -89,6 +89,8 @@ export function setCurrentStep(step, attempt = 0, maxAttemts = 3, delay = 1000) 
           false // попытки закончились
         )
 
+        tg.MainButton.hide()
+
         let nexDelay = delay * 2
 
         return wait(nexDelay)
@@ -99,6 +101,9 @@ export function setCurrentStep(step, attempt = 0, maxAttemts = 3, delay = 1000) 
           `Попробуйте зайти позже. Вы остановились на точке ${point.array[point.index - 1]}`,
           true // попытки закончились
         )
+
+        tg.MainButton.hide()
+
         throw new Error('Max attemts reached')
       }
     })

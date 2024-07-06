@@ -55,7 +55,12 @@ function toggleMeditation() {
   meditationText.classList.toggle('meditation_text_show')
 }
 
-playBtn.addEventListener('click', toggleKnitting)
+tg.MainButton.setParams({
+  text: 'СТАРТ',
+  color: '#E34D4D',
+  is_visible: true,
+})
+tg.MainButton.onClick(toggleKnitting)
 meditationBtn.addEventListener('click', toggleMeditation)
 sliderEl.addEventListener('input', knittingSpeedHandle)
 descriptionCloseBtn.addEventListener('click', closeDescription)
@@ -66,5 +71,10 @@ window.addEventListener('offline', function() {
     `Вы остановились на точке ${point.array[point.index - 1]}`,
     true // попытки закончились
   )
+
+  tg.MainButton.hide()
 })
-window.addEventListener('online', hideErrorMessage)
+window.addEventListener('online', function() {
+  hideErrorMessage()
+  tg.MainButton.show()
+})

@@ -1,5 +1,5 @@
 import {
-  playBtn, delay, point, knitting,
+  delay, point, knitting, tg,
 } from '../utils/constants.js'
 import { updateProgressBar } from './progressBarHandle.js'
 import { playSound } from './soundHandle.js'
@@ -45,8 +45,10 @@ function startKnitting() {
   if (!point.array[point.index]) stopKnitting()
   if (point.index == 0) closeDescription()
 
-  playBtn.classList.add('trigger_btn_pause')
-  playBtn.textContent = 'Пауза'
+  tg.MainButton.setParams({
+    text: 'ПАУЗА',
+    color: '#2DA122',
+  })
 
   knitting.play = true
 
@@ -54,16 +56,20 @@ function startKnitting() {
 }
 
 export function stopKnitting() {
-  playBtn.classList.remove('trigger_btn_pause')
-
   // End of points array?
   if (point.index == point.array.length) {
-    playBtn.textContent = 'Сначала'
-    playBtn.classList.add('trigger_btn_reload')
+    tg.MainButton.setText('СНАЧАЛА')
+    tg.MainButton.setParams({
+      text: 'СНАЧАЛА',
+      color: '#E3B422',
+    })
 
     knitting.end = true
   } else {
-    playBtn.textContent = 'Старт'
+    tg.MainButton.setParams({
+      text: 'СТАРТ',
+      color: '#E34D4D',
+    })
   }
 
   clearTimeout(knitting.id)
@@ -75,8 +81,10 @@ function resetKnitting() {
   point.index = 0
   point.currentStep = 0
 
-  playBtn.textContent = 'Старт'
-  playBtn.classList.remove('trigger_btn_reload')
+  tg.MainButton.setParams({
+    text: 'СТАРТ',
+    color: '#E34D4D',
+  })
 
   point.source.classList.remove('show_point')
   point.target.classList.remove('show_point')
