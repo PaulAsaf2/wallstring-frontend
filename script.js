@@ -26,7 +26,7 @@ getUserData()
           setSourcePoint(false) // set current point
         }
       })
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
   })
   .catch(err => console.log(err))
 

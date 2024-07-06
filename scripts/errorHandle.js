@@ -1,6 +1,6 @@
 import {
   errorPopup, errorTitle, errorSubtitle, iconProcess,
-  iconWarning, test,
+  iconWarning,
 } from '../utils/constants.js'
 
 export function showErrorMessage(title, subtitle, maxAttemts) {

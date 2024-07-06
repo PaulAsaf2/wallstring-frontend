@@ -7,8 +7,8 @@ export function getUserData() {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     const promocode = urlParams.get('promocode')
-    const userId = tg?.initDataUnsafe?.user?.id
-    // const userId = '123'
+    // const userId = tg?.initDataUnsafe?.user?.id
+    const userId = '123'
 
     if (userId && promocode) {
       user.tgId = userId
@@ -30,11 +30,11 @@ export function getKnittingData(props) {
       throw new Error('Network reponse was not ok')
     })
     .then(data => {
-      if (data) {
+      if (data && data.length > 0) {
         retrievePoints(data)
         retrieveCurrentStep(data)
       } else {
-        throw new Error('No knitting data available')
+        throw new Error('Knitting data is not available')
       }
     })
 }
