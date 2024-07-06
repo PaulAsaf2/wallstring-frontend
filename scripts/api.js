@@ -1,5 +1,6 @@
-import { point, tg, knittingUrl, user } from '../utils/constants.js'
+import { point, tg, knittingUrl, user, knitting, test, } from '../utils/constants.js'
 import { stopKnitting } from './playbackHandle.js'
+import { showErrorMessage } from './errorHandle.js'
 
 export function getUserData() {
   return new Promise((resolve, reject) => {
@@ -29,11 +30,11 @@ export function getKnittingData(props) {
       throw new Error('Запрос на получение координат не был успешно выполнен.')
     })
     .then(data => {
-      if (data) {
+      if (data && data.length > 0) {
         retrievePoints(data)
         retrieveCurrentStep(data)
       } else {
-        throw new Error('Ответ не содержит данных.')
+        throw new Error('Knitting data is not available')
       }
     })
 }
@@ -50,33 +51,55 @@ function retrieveCurrentStep(userData) {
 
 export function retrievePoints(userData) {
   point.array = userData[0].code.split(/\s+/)
+
+  console.log(point.array);
 }
 
-export function setCurrentStep(step, retryCount = 0) {
-  const maxRetryCount = 0
+function wait(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+export function setCurrentStep(step, attempt = 0, maxAttemts = 3, delay = 1000) {
   const params = new URLSearchParams({
     userId: user.tgId,
     promocode: user.promocode,
     newCount: step
   })
-  
-  fetch(knittingUrl + 'setCountApp.php?' + params)
+
+  return fetch(knittingUrl + 'setCountApp.php?' + params)
     .then(response => {
       if (response.ok) return response.json()
-      throw new Error('Network reponse was not ok')
+      throw new Error('Response not ok')
     })
     .then(data => {
       if (data.success) return console.log(data)
-      throw Error('An error occurred when saving the Count №' + step)
+      throw Error('An error occurred while saving a point')
     })
-    .catch(err => {
-      console.log(err)
-      if (retryCount < maxRetryCount) {
-        console.log(`Retrying... Atempt ${retryCount}`);
-        setCurrentStep(step, retryCount + 1)
+    .catch(error => {
+      console.log(error)
+
+      if (knitting.play) stopKnitting()
+
+      if (attempt < maxAttemts) {
+        console.log(`Retrying... (${attempt + 1} of ${maxAttemts})`);
+
+        showErrorMessage(
+          'Ошибка при связи с сервером.',
+          `Попытка ${attempt + 1} из ${maxAttemts}`,
+          false // попытки закончились
+        )
+
+        let nexDelay = delay * 2
+
+        return wait(nexDelay)
+          .then(() => setCurrentStep(step, attempt + 1, maxAttemts, nexDelay))
       } else {
-        console.log('Max retry attempts reached. We could not save a point №' + step);
-        stopKnitting()
+        showErrorMessage(
+          'Ошибка при связи с сервером.',
+          `Попробуйте зайти позже. Вы остановились на точке ${point.array[point.index - 1]}`,
+          true // попытки закончились
+        )
+        throw new Error('Max attemts reached')
       }
     })
 }

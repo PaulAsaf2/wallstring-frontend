@@ -9,6 +9,7 @@ import { knittingSpeedHandle } from './scripts/speedHandle.js'
 import { getUserData, getKnittingData } from './scripts/api.js'
 import { setSourcePoint } from './scripts/updatePoints.js'
 import { updateProgressBar } from './scripts/progressBarHandle.js'
+import { showErrorMessage, hideErrorMessage } from './scripts/errorHandle.js'
 
 tg.expand()
 
@@ -27,24 +28,22 @@ getUserData()
         }
       })
       .catch(err => {
-        console.log(err)
-        alert(err.message)
-        // tg.showAlert(err.message)
+        console.error(err)
+        tg.showAlert('Не удалось получить данные для шитья')
       })
   })
   .catch(err => {
     console.log(err)
-    alert(err.message)
-    // tg.showAlert(err.message)
+    tg.showAlert('Не удалось получить данные пользователя')
   })
 
 function showInitialPrompts() {
-  popup.classList.add('popup_dont_worry_show')
+  popup.classList.add('popup_fullwidth_show')
   initialDescription.classList.add('description_show')
 }
 
 function closePopup() {
-  popup.classList.remove('popup_dont_worry_show')
+  popup.classList.remove('popup_fullwidth_show')
 }
 
 export function closeDescription() {
@@ -61,3 +60,11 @@ meditationBtn.addEventListener('click', toggleMeditation)
 sliderEl.addEventListener('input', knittingSpeedHandle)
 descriptionCloseBtn.addEventListener('click', closeDescription)
 closePopupBtn.addEventListener('click', closePopup)
+window.addEventListener('offline', function() {
+  showErrorMessage(
+    'Нет подключения к интернету',
+    `Вы остановились на точке ${point.array[point.index - 1]}`,
+    true // попытки закончились
+  )
+})
+window.addEventListener('online', hideErrorMessage)

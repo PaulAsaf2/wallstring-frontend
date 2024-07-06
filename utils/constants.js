@@ -1,4 +1,9 @@
-const popup = document.querySelector('.popup_dont_worry')
+const popup = document.querySelector('.popup_fullwidth')
+const errorPopup = document.querySelector('.popup_fullwidth_error')
+const errorTitle = document.querySelector('.error_title')
+const errorSubtitle = document.querySelector('.error_subtitle')
+const iconProcess = document.querySelector('.icon_process')
+const iconWarning = document.querySelector('.icon_warning')
 const meditationBtn = document.querySelector('.meditaion_btn_off')
 const meditationText = document.querySelector('.meditation_text')
 const closePopupBtn = document.querySelector('.close_popup_btn')
@@ -9,6 +14,7 @@ const progBar = document.querySelector('.progress-bar')
 const stepCount = document.querySelector('.step')
 const initialDescription = document.querySelector('.description')
 const descriptionCloseBtn = document.querySelector('.description_close')
+
 const tg = window.Telegram.WebApp
 const delay = {
   betweenPoints: 1000,
@@ -30,10 +36,18 @@ const point = {
   source: null,
   target: null,
 }
+const knitting = {
+  play: false,
+  end: false,
+  id: '',
+}
 const knittingUrl = 'https://pin.sourctech.ru/telegram/string/'
 const user = {
   tgId: null,
   promocode: null,
+}
+const test = {
+  test: true,
 }
 const detectSounds = {
   A: [0, 580],
@@ -119,4 +133,11 @@ export {
   knittingUrl,
   tg,
   user,
+  knitting,
+  errorPopup,
+  errorTitle,
+  errorSubtitle,
+  iconProcess,
+  iconWarning,
+  test,
 }

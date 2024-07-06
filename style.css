@@ -45,7 +45,7 @@ body {
   font-weight: 300;
 }
 
-.popup_dont_worry {
+.popup_fullwidth {
   display: none;
   position: fixed;
   top: 0;
@@ -59,7 +59,22 @@ body {
   row-gap: 50px;
 }
 
-.popup_dont_worry_show {
+.popup_fullwidth_error {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.popup_fullwidth_error_text {
+  padding: 0 40px;
+  text-align: center;
+}
+
+.popup_fullwidth_error_icon {
+  display: none;
+  width: 100px;
+  height: 100px;
+}
+
+.popup_fullwidth_show {
   display: flex;
 }
 
