@@ -27,9 +27,15 @@ getUserData()
           setSourcePoint(false) // set current point
         }
       })
-      .catch(err => console.error(err))
+      .catch(err => {
+        console.error(err)
+        tg.showAlert('Не удалось получить данные для шитья')
+      })
   })
-  .catch(err => console.log(err))
+  .catch(err => {
+    console.log(err)
+    tg.showAlert('Не удалось получить данные пользователя')
+  })
 
 function showInitialPrompts() {
   popup.classList.add('popup_fullwidth_show')
@@ -61,6 +67,4 @@ window.addEventListener('offline', function() {
     true // попытки закончились
   )
 })
-window.addEventListener('online', function() {
-  hideErrorMessage()
-})
+window.addEventListener('online', hideErrorMessage)
