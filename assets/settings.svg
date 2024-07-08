@@ -1,11 +1,11 @@
-<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="17.5" cy="7.5" r="2.5" stroke="#675DD8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M5 7.5H15" stroke="#675DD8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M20 7.5H25" stroke="#675DD8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="10" cy="15" r="2.5" stroke="#675DD8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M5 15H7.5" stroke="#675DD8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M12.5 15H25" stroke="#675DD8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="21.25" cy="22.5" r="2.5" stroke="#675DD8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M5 22.5H18.75" stroke="#675DD8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M23.75 22.5H25" stroke="#675DD8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="13.5" cy="3.5" r="2.5" stroke="#675DD8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1 3.5H11" stroke="#675DD8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M16 3.5H21" stroke="#675DD8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="6" cy="11" r="2.5" stroke="#675DD8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1 11H3.5" stroke="#675DD8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M8.5 11H21" stroke="#675DD8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="17.25" cy="18.5" r="2.5" stroke="#675DD8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1 18.5H14.75" stroke="#675DD8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M19.75 18.5H21" stroke="#675DD8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

@@ -4,6 +4,7 @@ const errorTitle = document.querySelector('.error_title')
 const errorSubtitle = document.querySelector('.error_subtitle')
 const iconProcess = document.querySelector('.icon_process')
 const iconWarning = document.querySelector('.icon_warning')
+const settingBtn = document.querySelector('.setting_btn')
 const meditationBtn = document.querySelector('.meditaion_btn_off')
 const meditationText = document.querySelector('.meditation_text')
 const closePopupBtn = document.querySelector('.close_popup_btn')
@@ -117,6 +118,7 @@ const detectSounds = {
 }
 export {
   popup,
+  settingBtn,
   meditationBtn,
   meditationText,
   playBtn,

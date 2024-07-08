@@ -3,7 +3,7 @@ a, p, ol, ul, li, h1, h2, h3, h4, h5 {
 }
 
 body {
-  background-color: #F6F6F6;
+  background-color: var(--tg-theme-bg-color);
   /* <weight>: Use a value from 300 to 800 */
   font-family: "Open Sans", sans-serif;
   font-optical-sizing: auto;
@@ -11,6 +11,7 @@ body {
   font-size: 15px;
   font-style: normal;
   font-variation-settings: "wdth" 100;
+  color: var(--tg-theme-text-color);
 }
 
 .header_cont {
@@ -30,6 +31,11 @@ body {
   background-position: center;
   background-color: white;
   box-shadow: 0 0 4px #e2e2e2;
+}
+
+.square_btn_dark {
+  background-color: #53566a;
+  box-shadow: 0 0 4px #53566a;
 }
 
 .rectangular_btn {
@@ -90,6 +96,10 @@ body {
   background-image: url(./assets/settings.svg);
 }
 
+.setting_btn_dark {
+  background-image: url(./assets/settings-light.svg);
+}
+
 .close_btn {
   border-radius: 50%;
   border: none;
@@ -119,7 +129,7 @@ body {
 .step {
   text-align: center;
   font-size: 1em;
-  color: #6F6F6F;
+  color: var(--tg-theme-text-color);
   margin-bottom: 10px;
   min-height: 20px;
 }

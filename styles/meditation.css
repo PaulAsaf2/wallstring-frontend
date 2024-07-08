@@ -26,6 +26,10 @@
   transition: background-image 1s, background-color .6s;
 }
 
+.meditation_btn_dark {
+  background-image: url(../assets/plant-light-purple.svg);
+}
+
 .meditaion_btn_on {
   background-color: #7367F0;
   background-image: url(../assets/plant.svg);
