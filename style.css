@@ -118,12 +118,16 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 14% 8px 0;
+  /* padding: 14% 8px 0; */
   row-gap: 6vh;
+  /* background-color: #c02f2f; */
+  height: calc(100vh - 150px);
 }
 
 .step_section {
-  width: 100%;
+  position: absolute;
+  bottom: 5vh;
+  width: 80%;
 }
 
 .step {
