@@ -114,19 +114,22 @@ body {
 }
 
 .main {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -45%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* padding: 14% 8px 0; */
   row-gap: 6vh;
-  /* background-color: #c02f2f; */
-  height: calc(100vh - 150px);
 }
 
 .step_section {
   position: absolute;
+  left: 50%;
   bottom: 5vh;
+  transform: translate(-50%, -50%);
   width: 80%;
 }
 
