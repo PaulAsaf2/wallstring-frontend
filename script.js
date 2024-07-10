@@ -1,7 +1,7 @@
 import { toggleKnitting } from './scripts/playbackHandle.js'
 import {
   popup, meditationBtn, meditationText,
-  playBtn, sliderEl, descriptionCloseBtn,
+  sliderEl, descriptionCloseBtn,
   closePopupBtn, point, initialDescription,
   tg,
 } from './utils/constants.js'
@@ -9,7 +9,7 @@ import { knittingSpeedHandle } from './scripts/speedHandle.js'
 import { getUserData, getKnittingData } from './scripts/api.js'
 import { setSourcePoint } from './scripts/updatePoints.js'
 import { updateProgressBar } from './scripts/progressBarHandle.js'
-import { showErrorMessage, hideErrorMessage } from './scripts/errorHandle.js'
+import { showErrorMessage, hideErrorMessage, linkToTelegram } from './scripts/errorHandle.js'
 import { setColorStyle } from './utils/style.js'
 
 tg.expand()
@@ -32,11 +32,17 @@ getUserData()
       .catch(err => {
         console.error(err)
         tg.showAlert('Не удалось получить данные для шитья')
+        tg.MainButton.disable()
       })
   })
   .catch(err => {
-    console.log(err)
-    tg.showAlert('Не удалось получить данные пользователя')
+    console.error(err)
+
+    if (err.data.isNotTelegram) {
+      linkToTelegram()
+    } else {
+      tg.showAlert(err.message)
+    }
   })
 
 function showInitialPrompts() {

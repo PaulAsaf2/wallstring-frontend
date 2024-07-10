@@ -1,6 +1,6 @@
 import {
   errorPopup, errorTitle, errorSubtitle, iconProcess,
-  iconWarning,
+  iconWarning, tgErrorPopup
 } from '../utils/constants.js'
 
 export function showErrorMessage(title, subtitle, maxAttemts) {
@@ -19,4 +19,8 @@ export function showErrorMessage(title, subtitle, maxAttemts) {
 
 export function hideErrorMessage() {
   errorPopup.classList.remove('popup_fullwidth_show')
+}
+
+export function linkToTelegram() {
+  tgErrorPopup.classList.add('popup_fullwidth_show')
 }

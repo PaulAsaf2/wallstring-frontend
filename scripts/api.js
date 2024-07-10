@@ -7,16 +7,29 @@ export function getUserData() {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     const promocode = urlParams.get('promocode')
-    // const userId = tg?.initDataUnsafe?.user?.id
-    const userId = '123'
+    let userId = tg?.initDataUnsafe?.user?.id
 
-    if (userId && promocode) {
+    // Temporary!
+    if (userId) {
+      userId = '123'
+    }
+    // ---------
+
+    if (!userId) {
+      const error = new Error('ID пользователя Телеграм не найден')
+      error.data = { isNotTelegram: true }
+      
+      reject(error)
+    } else if (!promocode) {
+      const error = new Error('Промокод пользователя на найден')
+      error.data = { isNotTelegram: false }
+
+      reject(error)
+    } else {
       user.tgId = userId
       user.promocode = promocode
 
       resolve({ userId, promocode })
-    } else {
-      reject(new Error('Ошибка получения данных: promocode или userId отсутствуют.'))
     }
   })
 }

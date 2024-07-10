@@ -15,6 +15,7 @@ const progBar = document.querySelector('.progress-bar')
 const stepCount = document.querySelector('.step')
 const initialDescription = document.querySelector('.description')
 const descriptionCloseBtn = document.querySelector('.description_close')
+const tgErrorPopup = document.querySelector('.tg-error')
 const tg = window.Telegram.WebApp
 
 const delay = {
@@ -142,4 +143,5 @@ export {
   iconProcess,
   iconWarning,
   test,
+  tgErrorPopup,
 }
