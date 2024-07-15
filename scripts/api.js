@@ -1,4 +1,4 @@
-import { point, tg, knittingUrl, user, knitting, test, } from '../utils/constants.js'
+import { point, tg, knittingUrl, knitting, } from '../utils/constants.js'
 import { stopKnitting } from './playbackHandle.js'
 import { showErrorMessage } from './errorHandle.js'
 
@@ -16,9 +16,15 @@ export function checkInitData(initData) {
     })
     .then(data => {
       const user = JSON.parse(data.initData.user)
-      tg.CloudStorage.setItem('userId', user.id)
+      // tg.CloudStorage.setItem('userId', user.id)
       // return user.id
-      return '123'
+
+      // TEMPORARY
+      let fakeUserId = '123'
+      tg.CloudStorage.setItem('userId', fakeUserId)
+
+      return fakeUserId
+      // ---------
     })
 }
 
@@ -76,12 +82,66 @@ function wait(ms) {
 }
 
 export function setCurrentStep(step, attempt = 0, maxAttemts = 3, delay = 1000) {
+  tg.CloudStorage.getItems(['userId', 'promocode'], (error, value) => {
+    if (error) {
+      console.error(error)
+    } else {
+      const params = new URLSearchParams({
+        userId: value.userId,
+        promocode: value.promocode,
+        newCount: step
+      })
+
+      return fetch(knittingUrl + 'setCountApp.php?' + params)
+        .then(response => {
+          if (response.ok) return response.json()
+          throw new Error('Response not ok')
+        })
+        .then(data => {
+          if (data.success) return console.log(data)
+          throw Error('An error occurred while saving a point')
+        })
+        .catch(error => {
+          console.log(error)
+
+          if (knitting.play) stopKnitting()
+
+          if (attempt < maxAttemts) {
+            console.log(`Retrying... (${attempt + 1} of ${maxAttemts})`);
+
+            showErrorMessage(
+              'Ошибка при связи с сервером.',
+              `Попытка ${attempt + 1} из ${maxAttemts}`,
+              false // попытки закончились
+            )
+
+            tg.MainButton.hide()
+
+            let nexDelay = delay * 2
+
+            return wait(nexDelay)
+              .then(() => setCurrentStep(step, attempt + 1, maxAttemts, nexDelay))
+          } else {
+            showErrorMessage(
+              'Ошибка при связи с сервером.',
+              `Попробуйте зайти позже. Вы остановились на точке ${point.array[point.index - 1]}`,
+              true // попытки закончились
+            )
+
+            tg.MainButton.hide()
+
+            throw new Error('Max attemts reached')
+          }
+        })
+    }
+  })
+  /*
   const params = new URLSearchParams({
     userId: user.tgId,
     promocode: user.promocode,
     newCount: step
   })
-
+  
   return fetch(knittingUrl + 'setCountApp.php?' + params)
     .then(response => {
       if (response.ok) return response.json()
@@ -123,4 +183,5 @@ export function setCurrentStep(step, attempt = 0, maxAttemts = 3, delay = 1000) 
         throw new Error('Max attemts reached')
       }
     })
+  */
 }

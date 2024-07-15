@@ -30,6 +30,16 @@ checkInitData(tg.initData)
             } else {
               setSourcePoint(false) // set current point
             }
+
+            console.log(
+              tg.CloudStorage.getItems(['userId', 'promocode'], (error, value) => {
+                if (error) {
+                  console.error(error)
+                } else {
+                  console.log(value);
+                }
+              }),
+            );
           })
           .catch(err => {
             console.error(err)

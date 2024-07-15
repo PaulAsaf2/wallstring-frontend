@@ -44,10 +44,7 @@ const knitting = {
   id: '',
 }
 const knittingUrl = 'https://pin.sourctech.ru/telegram/string/'
-const user = {
-  tgId: null,
-  promocode: null,
-}
+
 const test = {
   test: true,
 }
@@ -135,7 +132,6 @@ export {
   descriptionCloseBtn,
   knittingUrl,
   tg,
-  user,
   knitting,
   errorPopup,
   errorTitle,
