@@ -2,8 +2,8 @@ import { point, tg, knittingUrl, user, knitting, test, } from '../utils/constant
 import { stopKnitting } from './playbackHandle.js'
 import { showErrorMessage } from './errorHandle.js'
 
-function checkInitData(initData) {
-  fetch('http://127.0.0.1:3002/check-initdata', {
+export function checkInitData(initData) {
+  return fetch('http://127.0.0.1:3002/check-initdata', {
     method: 'POST',
     headers: {
       'Content-Type': 'text/plain;charset=utf-8',
@@ -16,42 +16,23 @@ function checkInitData(initData) {
     })
     .then(data => {
       const user = JSON.parse(data.initData.user)
-      return user.id
+      tg.CloudStorage.setItem('userId', user.id)
+      // return user.id
+      return '123'
     })
-    
 }
 
-export function getUserData() {
+export function getPromocode() {
   return new Promise((resolve, reject) => {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     const promocode = urlParams.get('promocode')
-    
-    let userId = tg?.initDataUnsafe?.user?.id
-    
-    checkInitData(tg.initData)
 
-    // Temporary!
-    if (userId) {
-      userId = '123'
-    }
-    // ---------
-
-    if (!userId) {
-      const error = new Error('ID пользователя Телеграм не найден')
-      error.data = { isNotTelegram: true }
-      
-      reject(error)
-    } else if (!promocode) {
-      const error = new Error('Промокод пользователя на найден')
-      error.data = { isNotTelegram: false }
-
-      reject(error)
+    if (promocode) {
+      tg.CloudStorage.setItem('promocode', promocode)
+      resolve(promocode)
     } else {
-      user.tgId = userId
-      user.promocode = promocode
-
-      resolve({ userId, promocode })
+      reject('Promocode not found')
     }
   })
 }

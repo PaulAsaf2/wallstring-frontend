@@ -6,7 +6,7 @@ import {
   tg,
 } from './utils/constants.js'
 import { knittingSpeedHandle } from './scripts/speedHandle.js'
-import { getUserData, getKnittingData } from './scripts/api.js'
+import {/* getUserData,*/ getKnittingData, checkInitData, getPromocode } from './scripts/api.js'
 import { setSourcePoint } from './scripts/updatePoints.js'
 import { updateProgressBar } from './scripts/progressBarHandle.js'
 import { showErrorMessage, hideErrorMessage, linkToTelegram } from './scripts/errorHandle.js'
@@ -15,34 +15,36 @@ import { setColorStyle } from './utils/style.js'
 tg.expand()
 setColorStyle()
 
-getUserData()
-  .then(data => {
-    getKnittingData(data)
-      .then(() => {
-        updateProgressBar(point.currentStep, point.array.length)
-        knittingSpeedHandle()
+checkInitData(tg.initData)
+  .then(userId => {
+    getPromocode()
+      .then(promocode => {
+        getKnittingData({ userId, promocode })
+          .then(() => {
+            updateProgressBar(point.currentStep, point.array.length)
+            knittingSpeedHandle()
 
-        if (point.currentStep == 0) {
-          showInitialPrompts()
-          setSourcePoint(true) // set initial point
-        } else {
-          setSourcePoint(false) // set current point
-        }
+            if (point.currentStep == 0) {
+              showInitialPrompts()
+              setSourcePoint(true) // set initial point
+            } else {
+              setSourcePoint(false) // set current point
+            }
+          })
+          .catch(err => {
+            console.error(err)
+            tg.showAlert('Не удалось получить данные для шитья')
+            tg.MainButton.disable()
+          })
       })
-      .catch(err => {
-        console.error(err)
-        tg.showAlert('Не удалось получить данные для шитья')
-        tg.MainButton.disable()
+      .catch(error => {
+        console.error(error)
+        tg.showAlert('Промокод не найден.')
       })
   })
-  .catch(err => {
-    console.error(err)
-
-    if (err.data.isNotTelegram) {
-      linkToTelegram()
-    } else {
-      tg.showAlert(err.message)
-    }
+  .catch(error => {
+    console.error(error)
+    linkToTelegram()
   })
 
 function showInitialPrompts() {
