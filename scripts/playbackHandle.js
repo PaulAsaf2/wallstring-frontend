@@ -32,8 +32,9 @@ function handleKnitting() {
         continueKnitting()
       }
     })
-    .catch(err => {
-      console.log(err)
+    .catch(error => {
+      if (knitting.play) stopKnitting()
+      tg.showAlert(error)
     })
 }
 

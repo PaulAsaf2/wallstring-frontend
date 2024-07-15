@@ -15,7 +15,7 @@ export function checkInitData(initData) {
       throw new Error('HTTP-Error: ' + res.status)
     })
     .then(data => {
-      const user = JSON.parse(data.initData.user)
+      // const user = JSON.parse(data.initData.user)
       // tg.CloudStorage.setItem('userId', user.id)
       // return user.id
 
@@ -82,106 +82,66 @@ function wait(ms) {
 }
 
 export function setCurrentStep(step, attempt = 0, maxAttemts = 3, delay = 1000) {
-  tg.CloudStorage.getItems(['userId', 'promocode'], (error, value) => {
-    if (error) {
-      console.error(error)
-    } else {
-      const params = new URLSearchParams({
-        userId: value.userId,
-        promocode: value.promocode,
-        newCount: step
-      })
-
-      return fetch(knittingUrl + 'setCountApp.php?' + params)
-        .then(response => {
-          if (response.ok) return response.json()
-          throw new Error('Response not ok')
-        })
-        .then(data => {
-          if (data.success) return console.log(data)
-          throw Error('An error occurred while saving a point')
-        })
-        .catch(error => {
-          console.log(error)
-
-          if (knitting.play) stopKnitting()
-
-          if (attempt < maxAttemts) {
-            console.log(`Retrying... (${attempt + 1} of ${maxAttemts})`);
-
-            showErrorMessage(
-              'Ошибка при связи с сервером.',
-              `Попытка ${attempt + 1} из ${maxAttemts}`,
-              false // попытки закончились
-            )
-
-            tg.MainButton.hide()
-
-            let nexDelay = delay * 2
-
-            return wait(nexDelay)
-              .then(() => setCurrentStep(step, attempt + 1, maxAttemts, nexDelay))
-          } else {
-            showErrorMessage(
-              'Ошибка при связи с сервером.',
-              `Попробуйте зайти позже. Вы остановились на точке ${point.array[point.index - 1]}`,
-              true // попытки закончились
-            )
-
-            tg.MainButton.hide()
-
-            throw new Error('Max attemts reached')
-          }
-        })
-    }
-  })
-  /*
-  const params = new URLSearchParams({
-    userId: user.tgId,
-    promocode: user.promocode,
-    newCount: step
-  })
-  
-  return fetch(knittingUrl + 'setCountApp.php?' + params)
-    .then(response => {
-      if (response.ok) return response.json()
-      throw new Error('Response not ok')
-    })
-    .then(data => {
-      if (data.success) return console.log(data)
-      throw Error('An error occurred while saving a point')
-    })
-    .catch(error => {
-      console.log(error)
-
-      if (knitting.play) stopKnitting()
-
-      if (attempt < maxAttemts) {
-        console.log(`Retrying... (${attempt + 1} of ${maxAttemts})`);
-
-        showErrorMessage(
-          'Ошибка при связи с сервером.',
-          `Попытка ${attempt + 1} из ${maxAttemts}`,
-          false // попытки закончились
-        )
-
-        tg.MainButton.hide()
-
-        let nexDelay = delay * 2
-
-        return wait(nexDelay)
-          .then(() => setCurrentStep(step, attempt + 1, maxAttemts, nexDelay))
+  return new Promise((resolve, reject) => {
+    tg.CloudStorage.getItems(['userId', 'promocode'], (error, value) => {
+      if (error) {
+        reject(error)
+      } else if (!value.userId || !value.promocode) {
+        console.error('Failed to process user data when saving a point')
+        reject('Не удалось обработать данные пользователя при сохранении точки')
       } else {
-        showErrorMessage(
-          'Ошибка при связи с сервером.',
-          `Попробуйте зайти позже. Вы остановились на точке ${point.array[point.index - 1]}`,
-          true // попытки закончились
-        )
+        const params = new URLSearchParams({
+          userId: value.userId,
+          promocode: value.promocode,
+          newCount: step
+        })
 
-        tg.MainButton.hide()
+        fetch(knittingUrl + 'setCountApp.php?' + params)
+          .then(response => {
+            if (response.ok) return response.json()
+            throw new Error('Response not ok')
+          })
+          .then(data => {
+            if (data.success) {
+              console.log(data)
+              resolve()
+            } else {
+              throw Error('An error occurred while saving a point')
+            }
+          })
+          .catch(error => {
+            console.error(error)
 
-        throw new Error('Max attemts reached')
+            if (knitting.play) stopKnitting()
+
+            if (attempt < maxAttemts) {
+              console.log(`Retrying... (${attempt + 1} of ${maxAttemts})`);
+
+              showErrorMessage(
+                'Ошибка при связи с сервером.',
+                `Попытка ${attempt + 1} из ${maxAttemts}`,
+                false // попытки закончились
+              )
+
+              tg.MainButton.hide()
+
+              let nexDelay = delay * 2
+
+              return wait(nexDelay)
+                .then(() => setCurrentStep(step, attempt + 1, maxAttemts, nexDelay))
+            } else {
+              showErrorMessage(
+                'Ошибка при связи с сервером.',
+                `Попробуйте зайти позже. Вы остановились на точке ${point.array[point.index - 1]}`,
+                true // попытки закончились
+              )
+
+              tg.MainButton.hide()
+
+              reject('Max attemts reached')
+            }
+          })
       }
     })
-  */
+  })
 }

@@ -6,7 +6,7 @@ import {
   tg,
 } from './utils/constants.js'
 import { knittingSpeedHandle } from './scripts/speedHandle.js'
-import {/* getUserData,*/ getKnittingData, checkInitData, getPromocode } from './scripts/api.js'
+import {getKnittingData, checkInitData, getPromocode } from './scripts/api.js'
 import { setSourcePoint } from './scripts/updatePoints.js'
 import { updateProgressBar } from './scripts/progressBarHandle.js'
 import { showErrorMessage, hideErrorMessage, linkToTelegram } from './scripts/errorHandle.js'
