@@ -8,6 +8,16 @@ import { updateArrowDirection, resetArrows } from './updateArrow.js'
 import { closeDescription } from '../script.js'
 import { setCurrentStep } from './api.js'
 
+export function retrieveCurrentStep(userData) {
+  if (userData[0].count == userData[0].code.split(/\s+/).length) {
+    point.currentStep = 0
+    point.index = 0
+  } else {
+    point.currentStep = userData[0].count
+    point.index = userData[0].count
+  }
+}
+
 function handleKnitting() {
   if (!point.array[point.index]) {
     stopKnitting()

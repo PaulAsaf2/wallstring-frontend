@@ -3,18 +3,19 @@ import { stopKnitting } from './playbackHandle.js'
 import { showErrorMessage } from './errorHandle.js'
 
 export function checkInitData(initData) {
-  return fetch('http://127.0.0.1:3002/check-initdata', {
+  return fetch('https://wallstring.monitour.ru/api/validate.php', {
     method: 'POST',
     headers: {
-      'Content-Type': 'text/plain;charset=utf-8',
+      'Content-Type': 'application/json',
     },
-    body: initData
+    body: JSON.stringify({ initData })
   })
     .then(res => {
       if (res.ok) return res.json()
       throw new Error('HTTP-Error: ' + res.status)
     })
     .then(data => {
+      console.log(data);
       // const user = JSON.parse(data.initData.user)
       // tg.CloudStorage.setItem('userId', user.id)
       // return user.id
@@ -52,29 +53,9 @@ export function getKnittingData(props) {
       throw new Error('Запрос на получение координат не был успешно выполнен.')
     })
     .then(data => {
-      if (data && data.length > 0) {
-        retrievePoints(data)
-        retrieveCurrentStep(data)
-      } else {
-        throw new Error('Knitting data is not available')
-      }
+      if (data && data.length > 0) return data
+      throw new Error('Knitting data is not available')
     })
-}
-
-function retrieveCurrentStep(userData) {
-  if (userData[0].count == userData[0].code.split(/\s+/).length) {
-    point.currentStep = 0
-    point.index = 0
-  } else {
-    point.currentStep = userData[0].count
-    point.index = userData[0].count
-  }
-}
-
-export function retrievePoints(userData) {
-  point.array = userData[0].code.split(/\s+/)
-
-  console.log(point.array);
 }
 
 function wait(ms) {

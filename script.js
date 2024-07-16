@@ -1,4 +1,4 @@
-import { toggleKnitting } from './scripts/playbackHandle.js'
+import { toggleKnitting, retrieveCurrentStep } from './scripts/playbackHandle.js'
 import {
   popup, meditationBtn, meditationText,
   sliderEl, descriptionCloseBtn,
@@ -6,8 +6,8 @@ import {
   tg,
 } from './utils/constants.js'
 import { knittingSpeedHandle } from './scripts/speedHandle.js'
-import {getKnittingData, checkInitData, getPromocode } from './scripts/api.js'
-import { setSourcePoint } from './scripts/updatePoints.js'
+import { getKnittingData, checkInitData, getPromocode } from './scripts/api.js'
+import { setSourcePoint, retrievePoints } from './scripts/updatePoints.js'
 import { updateProgressBar } from './scripts/progressBarHandle.js'
 import { showErrorMessage, hideErrorMessage, linkToTelegram } from './scripts/errorHandle.js'
 import { setColorStyle } from './utils/style.js'
@@ -20,7 +20,9 @@ checkInitData(tg.initData)
     getPromocode()
       .then(promocode => {
         getKnittingData({ userId, promocode })
-          .then(() => {
+          .then((data) => {
+            retrievePoints(data)
+            retrieveCurrentStep(data)
             updateProgressBar(point.currentStep, point.array.length)
             knittingSpeedHandle()
 
@@ -30,16 +32,6 @@ checkInitData(tg.initData)
             } else {
               setSourcePoint(false) // set current point
             }
-
-            console.log(
-              tg.CloudStorage.getItems(['userId', 'promocode'], (error, value) => {
-                if (error) {
-                  console.error(error)
-                } else {
-                  console.log(value);
-                }
-              }),
-            );
           })
           .catch(err => {
             console.error(err)

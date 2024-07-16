@@ -1,5 +1,11 @@
 import { point } from '../utils/constants.js'
 
+export function retrievePoints(userData) {
+  point.array = userData[0].code.split(/\s+/)
+
+  console.log(point.array); // temporary
+}
+
 export function setSourcePoint(isInitialPoint) {
   if (isInitialPoint) {
     point.source = point.B
